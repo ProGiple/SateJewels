@@ -1,0 +1,27 @@
+jewelsSettings:
+  names:
+    0st: 'Аметист'
+    1st: 'Аметистов'
+    2st: 'Аметиста'
+    icon: '₳'
+messages: # пустая строка = выключено
+  giveJewels: 'Вы выдали игроку {player} x{amount}{name_icon}'
+  balance: 'Ваш баланс: x{amount}{name_icon}'
+  playerBalance: 'Баланса игрока {player}: x{amount}{name_icon}'
+  removeJewels: 'Вы забрали у игрока {player} x{amount}{name_icon}'
+  payJewels: 'Вы отправили игроку {player} x{amount}{name_icon}'
+  payedJewels: 'Вы получили x{amount}{name_icon} от игрока {player}'
+  setJewels: 'Вы установили игроку {player} x{amount}{name_icon}'
+  noPerm: 'У вас нет прав на использование этого!'
+  reloadPlugin: 'Плагин перезагружен!'
+  noArgs: 'Недостаточно аргументов!'
+  noJewels: 'У вас не хватает средств для перевода!'
+sounds:
+  successful: ENTITY_EXPERIENCE_ORB_PICKUP
+  error: BLOCK_ANVIL_PLACE
+placeholders: # плейсхолдеры: %satejewels_name_<name>%, %satejewels_autoname%, %satejewels_balance%
+  autoName: # %satejewels_autoname%
+    0: "1st"
+    1: "0st"
+    2-4: "2st"
+    5+: "1st"

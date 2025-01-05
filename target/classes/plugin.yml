@@ -1,0 +1,4 @@
+name: SateJewels
+version: '1.0.1'
+main: org.satellite.progiple.satejewels.SateJewels
+api-version: '1.16'
