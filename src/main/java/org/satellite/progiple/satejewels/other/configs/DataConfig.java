@@ -36,5 +36,7 @@ public class DataConfig {
         if (value < 0) value = Math.abs(value);
         this.config.set(String.format("players.%s", nick), value);
         this.config.save(this.file);
+        dataConfig = this;
+        this.reload();
     }
 }
