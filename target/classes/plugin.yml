@@ -1,4 +1,23 @@
 name: SateJewels
-version: '1.0.1'
+version: '1.0.3'
 main: org.satellite.progiple.satejewels.SateJewels
 api-version: '1.16'
+softdepend:
+  - PlaceholderAPI
+commands:
+  satejewels:
+    aliases:
+      - j
+      - jewels
+      - sjewels
+      - sj
+      - satej
+permissions:
+  sjewels.admin:
+    default: op
+  sjewels.balance.another:
+    default: op
+  sjewels.balance:
+    default: true
+  satejewels.pay:
+    default: op
