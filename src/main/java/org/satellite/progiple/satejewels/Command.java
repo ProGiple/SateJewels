@@ -126,7 +126,7 @@ public class Command implements CommandExecutor, TabCompleter {
         }
         else if (strings.length == 3 && (strings[0].equals("add") || strings[0].equals("set")
                 || strings[0].equals("take") || strings[0].equals("pay"))) {
-            list.add("<кол-во>");
+            list.add("<amount>");
         }
         return list;
     }
