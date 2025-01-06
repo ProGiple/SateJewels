@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
-import org.satellite.progiple.satejewels.SateJewels;
 
 import java.io.File;
 
@@ -14,9 +13,13 @@ public class DataConfig {
 
     @Getter private FileConfiguration config;
     private final File file;
-    public DataConfig() {
-        this.file = new File(SateJewels.getPlugin().getDataFolder(), "data.yml");
+    public DataConfig(File dataFolder) {
+        this.file = new File(dataFolder, "data.yml");
         this.reload();
+        this.initialize();
+    }
+
+    public void initialize() {
         dataConfig = this;
     }
 

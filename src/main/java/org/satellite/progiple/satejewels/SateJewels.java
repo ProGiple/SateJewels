@@ -16,7 +16,7 @@ public final class SateJewels extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         saveDefaultConfig();
-        new DataConfig();
+        new DataConfig(plugin.getDataFolder());
         new Config();
 
         Command command = new Command();
