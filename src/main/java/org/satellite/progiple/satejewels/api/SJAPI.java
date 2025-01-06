@@ -9,6 +9,11 @@ import org.satellite.progiple.satejewels.other.configs.DataConfig;
 import java.util.*;
 
 public class SJAPI {
+    public static boolean additiveLoad() {
+        new DataConfig();
+        return SJAPI.isNotNull();
+    }
+
     public static boolean isNotNull() {
         return DataConfig.getDataConfig() != null;
     }
