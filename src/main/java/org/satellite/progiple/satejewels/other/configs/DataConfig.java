@@ -22,6 +22,7 @@ public class DataConfig {
 
     public void reload() {
         this.config = YamlConfiguration.loadConfiguration(this.file);
+        dataConfig = this;
     }
 
     public int getValue(String nick) {
