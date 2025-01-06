@@ -16,8 +16,8 @@ public final class SateJewels extends JavaPlugin {
     public void onEnable() {
         plugin = this;
         saveDefaultConfig();
-        Config.setConfig(new Config());
-        DataConfig.setDataConfig(new DataConfig());
+        new DataConfig();
+        new Config();
 
         Command command = new Command();
         Objects.requireNonNull(getCommand("satejewels")).setTabCompleter(command);

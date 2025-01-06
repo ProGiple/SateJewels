@@ -1,7 +1,6 @@
 package org.satellite.progiple.satejewels.other.configs;
 
 import lombok.Getter;
-import lombok.Setter;
 import org.bukkit.Sound;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
@@ -11,13 +10,14 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Config {
-    @Getter @Setter private static Config config;
+    @Getter private static Config config;
     @Getter private static Map<String, String> jewelsNames = new HashMap<>();
 
     private final SateJewels plugin = SateJewels.getPlugin();
     private FileConfiguration fileConfig;
     public Config() {
         this.reload();
+        config = this;
     }
 
     public void reload() {

@@ -9,14 +9,12 @@ import org.satellite.progiple.satejewels.other.configs.DataConfig;
 import java.util.*;
 
 public class SJAPI {
-    private final static DataConfig cfg = DataConfig.getDataConfig();
-
     public static boolean isNotNull() {
-        return cfg != null;
+        return DataConfig.getDataConfig() != null;
     }
 
     public static int getJewels(String nick) {
-        return cfg.getValue(nick);
+        return DataConfig.getDataConfig().getValue(nick);
     }
 
     public static int getJewels(OfflinePlayer offlinePlayer) {
@@ -28,7 +26,7 @@ public class SJAPI {
     }
 
     public static void giveJewels(String nick, int value) {
-        cfg.setValue(nick, SJAPI.getJewels(nick) + value);
+        DataConfig.getDataConfig().setValue(nick, SJAPI.getJewels(nick) + value);
     }
 
     public static void giveJewels(OfflinePlayer offlinePlayer, int value) {
@@ -40,7 +38,7 @@ public class SJAPI {
     }
 
     public static void removeJewels(String nick, int value) {
-        cfg.setValue(nick, SJAPI.getJewels(nick) - value);
+        DataConfig.getDataConfig().setValue(nick, SJAPI.getJewels(nick) - value);
     }
 
     public static void removeJewels(OfflinePlayer offlinePlayer, int value) {
@@ -61,7 +59,7 @@ public class SJAPI {
     }
 
     public static void setJewels(String nick, int value) {
-        cfg.setValue(nick, value);
+        DataConfig.getDataConfig().setValue(nick, value);
     }
 
     public static void setJewels(OfflinePlayer offlinePlayer, int value) {
@@ -73,7 +71,7 @@ public class SJAPI {
     }
 
     public static ConfigurationSection getPlayerSection() {
-        return cfg.getConfig().getConfigurationSection("players");
+        return DataConfig.getDataConfig().getConfig().getConfigurationSection("players");
     }
 
     public static Map<String, String> getJewelNames() {

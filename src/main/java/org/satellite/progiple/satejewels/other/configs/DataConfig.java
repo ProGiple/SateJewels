@@ -1,7 +1,6 @@
 package org.satellite.progiple.satejewels.other.configs;
 
 import lombok.Getter;
-import lombok.Setter;
 import lombok.SneakyThrows;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
@@ -10,7 +9,7 @@ import org.satellite.progiple.satejewels.SateJewels;
 import java.io.File;
 
 public class DataConfig {
-    @Getter @Setter
+    @Getter
     private static DataConfig dataConfig;
 
     @Getter private FileConfiguration config;
@@ -18,11 +17,11 @@ public class DataConfig {
     public DataConfig() {
         this.file = new File(SateJewels.getPlugin().getDataFolder(), "data.yml");
         this.reload();
+        dataConfig = this;
     }
 
     public void reload() {
         this.config = YamlConfiguration.loadConfiguration(this.file);
-        dataConfig = this;
     }
 
     public int getValue(String nick) {
