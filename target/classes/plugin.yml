@@ -1,5 +1,5 @@
 name: SateJewels
-version: '1.0.5.2'
+version: '1.0.5.4'
 main: org.satellite.progiple.satejewels.SateJewels
 api-version: '1.16'
 softdepend:
