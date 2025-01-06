@@ -11,6 +11,10 @@ import java.util.*;
 public class SJAPI {
     private final static DataConfig cfg = DataConfig.getDataConfig();
 
+    public static boolean isNotNull() {
+        return cfg != null;
+    }
+
     public static int getJewels(String nick) {
         return cfg.getValue(nick);
     }
