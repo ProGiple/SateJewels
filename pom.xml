@@ -26,7 +26,6 @@
         <configuration>
           <source>16</source>
           <target>16</target>
-          <release>16</release>
         </configuration>
       </plugin>
       <plugin>
