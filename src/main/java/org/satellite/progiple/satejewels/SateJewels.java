@@ -20,8 +20,8 @@ public final class SateJewels extends JavaPlugin {
         DataConfig.setDataConfig(new DataConfig());
 
         Command command = new Command();
-        Objects.requireNonNull(getCommand("lunamoonjewels")).setTabCompleter(command);
-        Objects.requireNonNull(getCommand("lunamoonjewels")).setExecutor(command);
+        Objects.requireNonNull(getCommand("satejewels")).setTabCompleter(command);
+        Objects.requireNonNull(getCommand("satejewels")).setExecutor(command);
 
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Placeholders placeholders = new Placeholders();

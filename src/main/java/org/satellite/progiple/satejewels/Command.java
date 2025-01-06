@@ -43,14 +43,14 @@ public class Command implements CommandExecutor, TabCompleter {
                 case "balance", "bal":
                     if (args.length >= 2) {
                         String nick = args[1];
-                        if (sender.hasPermission("lmjewels.balance.another")) {
+                        if (sender.hasPermission("satejewels.balance.another")) {
                             Tools.sendMessage(sender, "playerBalance", DataConfig.getDataConfig().getValue(nick), nick, "successful");
                         }
                         else Tools.sendMessage(sender, "noPerm", "error");
                     }
                     else {
                         String nick = sender.getName();
-                        if (sender.hasPermission("lmjewels.balance")) {
+                        if (sender.hasPermission("satejewels.balance")) {
                             Tools.sendMessage(sender, "balance", DataConfig.getDataConfig().getValue(nick), "", "successful");
                         }
                         else Tools.sendMessage(sender, "noPerm", "error");
@@ -69,7 +69,7 @@ public class Command implements CommandExecutor, TabCompleter {
                     }
                     break;
                 case "payJewels", "pay":
-                    if (sender.hasPermission("lmjewels.pay")) {
+                    if (sender.hasPermission("satejewels.pay")) {
                         if (args.length >= 3) {
                             String nick = args[1];
                             int value = Integer.parseInt(args[2]);
@@ -107,7 +107,7 @@ public class Command implements CommandExecutor, TabCompleter {
     }
 
     private boolean hasAdminPerm(CommandSender sender) {
-        boolean value = sender.hasPermission("lmjewels.admin");;
+        boolean value = sender.hasPermission("satejewels.admin");;
         if (!value) Tools.sendMessage(sender, "noPerm", "error");
         return value;
     }
@@ -118,12 +118,14 @@ public class Command implements CommandExecutor, TabCompleter {
         if (strings.length == 1) {
             list.addAll(Arrays.asList("add", "reload", "take", "set", "pay", "balance"));
         }
-        else if (strings.length == 2) {
+        else if (strings.length == 2 && (strings[0].equals("add") || strings[0].equals("set")
+                || strings[0].equals("take") || strings[0].equals("pay") || strings[0].equals("balance"))) {
             for (Player player : Bukkit.getOnlinePlayers()) {
                 list.add(player.getName());
             }
         }
-        else if (strings.length == 3) {
+        else if (strings.length == 3 && (strings[0].equals("add") || strings[0].equals("set")
+                || strings[0].equals("take") || strings[0].equals("pay"))) {
             list.add("<кол-во>");
         }
         return list;
