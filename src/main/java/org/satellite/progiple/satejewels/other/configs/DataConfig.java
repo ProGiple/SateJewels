@@ -4,23 +4,19 @@ import lombok.Getter;
 import lombok.SneakyThrows;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
+import org.satellite.progiple.satejewels.SateJewels;
+import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
+import java.util.Map;
 
 public class DataConfig {
-    @Getter
-    private static DataConfig dataConfig;
 
     @Getter private FileConfiguration config;
     private final File file;
-    public DataConfig(File dataFolder) {
-        this.file = new File(dataFolder, "data.yml");
-        this.reload();
-        this.initialize();
-    }
-
-    public void initialize() {
-        dataConfig = this;
+    public DataConfig(String fileName) {
+        this.file = new File(SateJewels.getPlugin().getDataFolder(), fileName);
+        this.config = YamlConfiguration.loadConfiguration(this.file);
     }
 
     public void reload() {
@@ -36,7 +32,5 @@ public class DataConfig {
         if (value < 0) value = Math.abs(value);
         this.config.set(String.format("players.%s", nick), value);
         this.config.save(this.file);
-        dataConfig = this;
-        this.reload();
     }
 }

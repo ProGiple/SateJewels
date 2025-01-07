@@ -11,6 +11,8 @@ import org.satellite.progiple.satejewels.api.SJAPI;
 import org.satellite.progiple.satejewels.other.Tools;
 import org.satellite.progiple.satejewels.other.configs.Config;
 import org.satellite.progiple.satejewels.other.configs.DataConfig;
+import org.satellite.progiple.satejewels.other.configs.managers.ConfigManager;
+import org.satellite.progiple.satejewels.other.configs.managers.DataManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -35,8 +37,8 @@ public class Command implements CommandExecutor, TabCompleter {
                     break;
                 case "reload":
                     if (hasAdminPerm(sender)) {
-                        Config.getConfig().reload();
-                        DataConfig.getDataConfig().reload();
+                        ConfigManager.reload();
+                        DataManager.reload();
                         Tools.sendMessage(sender, "reloadPlugin", "successful");
                     }
                     break;
@@ -44,14 +46,14 @@ public class Command implements CommandExecutor, TabCompleter {
                     if (args.length >= 2) {
                         String nick = args[1];
                         if (sender.hasPermission("satejewels.balance.another")) {
-                            Tools.sendMessage(sender, "playerBalance", DataConfig.getDataConfig().getValue(nick), nick, "successful");
+                            Tools.sendMessage(sender, "playerBalance", DataManager.getValue(nick), nick, "successful");
                         }
                         else Tools.sendMessage(sender, "noPerm", "error");
                     }
                     else {
                         String nick = sender.getName();
                         if (sender.hasPermission("satejewels.balance")) {
-                            Tools.sendMessage(sender, "balance", DataConfig.getDataConfig().getValue(nick), "", "successful");
+                            Tools.sendMessage(sender, "balance", DataManager.getValue(nick), "", "successful");
                         }
                         else Tools.sendMessage(sender, "noPerm", "error");
                     }

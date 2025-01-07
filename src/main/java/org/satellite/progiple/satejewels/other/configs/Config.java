@@ -10,21 +10,19 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Config {
-    @Getter private static Config config;
-    @Getter private static Map<String, String> jewelsNames = new HashMap<>();
 
-    private final SateJewels plugin = SateJewels.getPlugin();
-    private FileConfiguration fileConfig;
+    @Getter private Map<String, String> jewelsNames = new HashMap<>();
+    private FileConfiguration config;
     public Config() {
-        this.reload();
-        config = this;
+        this.config = SateJewels.getPlugin().getConfig();
     }
 
     public void reload() {
+        SateJewels plugin = SateJewels.getPlugin();
         plugin.reloadConfig();
-        this.fileConfig = plugin.getConfig();
+        this.config = plugin.getConfig();
 
-        ConfigurationSection section = this.fileConfig.getConfigurationSection("jewelsSettings.names");
+        ConfigurationSection section = this.config.getConfigurationSection("jewelsSettings.names");
         if (section == null) return;
         jewelsNames.clear();
         for (String id : section.getKeys(false)) {
@@ -33,7 +31,7 @@ public class Config {
     }
 
     public String getString(String path) {
-        return fileConfig.getString(path);
+        return this.config.getString(path);
     }
 
     public Sound getSound(String type) {

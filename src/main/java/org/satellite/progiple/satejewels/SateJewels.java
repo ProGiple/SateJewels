@@ -9,6 +9,7 @@ import org.satellite.progiple.satejewels.other.configs.DataConfig;
 import java.util.Objects;
 
 public final class SateJewels extends JavaPlugin {
+    private static DataConfig dataConfig = new DataConfig();
     @Getter
     private static SateJewels plugin;
 

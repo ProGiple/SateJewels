@@ -5,6 +5,7 @@ import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.satellite.progiple.satejewels.api.SJAPI;
 import org.satellite.progiple.satejewels.other.configs.Config;
+import org.satellite.progiple.satejewels.other.configs.managers.ConfigManager;
 
 import java.util.Map;
 
@@ -17,7 +18,11 @@ public class Tools {
         Tools.sendMessage(sender, messageId, 0, "", soundId);
     }
 
-    public static void sendMessage(CommandSender sender, String message, String soundId, boolean value) {
+    public static void sendMessage(CommandSender sender, String messageId, int amount, String getterNick, String soundId) {
+        String message = ConfigManager.getString(String.format("messages.%s", messageId));
+        message = message.replace("{amount}", String.valueOf(amount));
+        message = message.replace("{player}", getterNick);
+
         if (sender == null) return;
         if (message.contains("{name_")) {
             for (Map.Entry<String, String> entry : SJAPI.getJewelNames().entrySet()) {
@@ -26,16 +31,8 @@ public class Tools {
         }
 
         sender.sendMessage(Tools.color(message));
-        if (sender instanceof Player) {
-            Player player = (Player) sender;
-            player.playSound(player.getLocation(), Config.getConfig().getSound(soundId), 1, 1);
+        if (sender instanceof Player player) {
+            player.playSound(player.getLocation(), ConfigManager.getSound(soundId), 1, 1);
         }
-    }
-
-    public static void sendMessage(CommandSender sender, String messageId, int amount, String getterNick, String soundId) {
-        String message = Config.getConfig().getString(String.format("messages.%s", messageId));
-        message = message.replace("{amount}", String.valueOf(amount));
-        message = message.replace("{player}", getterNick);
-        Tools.sendMessage(sender, message, soundId, true);
     }
 }

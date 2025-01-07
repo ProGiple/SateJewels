@@ -5,9 +5,9 @@ import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.satellite.progiple.satejewels.api.SJAPI;
 import org.satellite.progiple.satejewels.other.configs.Config;
+import org.satellite.progiple.satejewels.other.configs.managers.ConfigManager;
 
 public class Placeholders extends PlaceholderExpansion {
-    private final Config config = Config.getConfig();
 
     @Override
     public @NotNull String getIdentifier() {
@@ -37,10 +37,10 @@ public class Placeholders extends PlaceholderExpansion {
         if (params.equalsIgnoreCase("autoname")) {
             byte lastNum = (byte) (value % 10);
             return switch (lastNum) {
-                case 0 -> SJAPI.getJewelName(config.getString(String.format(mainPath, "0")));
-                case 1 -> SJAPI.getJewelName(config.getString(String.format(mainPath, "1")));
-                case 2, 3, 4 -> SJAPI.getJewelName(config.getString(String.format(mainPath, "2-4")));
-                default -> SJAPI.getJewelName(config.getString(String.format(mainPath, "5+")));
+                case 0 -> SJAPI.getJewelName(ConfigManager.getString(String.format(mainPath, "0")));
+                case 1 -> SJAPI.getJewelName(ConfigManager.getString(String.format(mainPath, "1")));
+                case 2, 3, 4 -> SJAPI.getJewelName(ConfigManager.getString(String.format(mainPath, "2-4")));
+                default -> SJAPI.getJewelName(ConfigManager.getString(String.format(mainPath, "5+")));
             };
         }
         else if (params.contains("name_")) {
