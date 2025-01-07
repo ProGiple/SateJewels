@@ -2,20 +2,21 @@ package org.satellite.progiple.satejewels.other.configs;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.satellite.progiple.satejewels.SateJewels;
-import org.yaml.snakeyaml.Yaml;
 
 import java.io.File;
-import java.util.Map;
 
 public class DataConfig {
 
     @Getter private FileConfiguration config;
     private final File file;
     public DataConfig(String fileName) {
-        this.file = new File(SateJewels.getPlugin().getDataFolder(), fileName);
+        SateJewels plugin = (SateJewels) Bukkit.getServer().getPluginManager().getPlugin(SateJewels.class.getName());
+        assert plugin != null;
+        this.file = new File(plugin.getDataFolder(), fileName);
         this.config = YamlConfiguration.loadConfiguration(this.file);
     }
 

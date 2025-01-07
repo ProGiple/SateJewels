@@ -13,7 +13,7 @@ public final class SateJewels extends JavaPlugin {
     @Override
     public void onEnable() {
         plugin = this;
-        saveDefaultConfig();
+        this.saveDefaultConfig();
         Command command = new Command();
         Objects.requireNonNull(getCommand("satejewels")).setTabCompleter(command);
         Objects.requireNonNull(getCommand("satejewels")).setExecutor(command);

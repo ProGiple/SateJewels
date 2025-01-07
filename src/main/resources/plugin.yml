@@ -13,11 +13,11 @@ commands:
       - sj
       - satej
 permissions:
-  sjewels.admin:
+  satejewels.admin:
     default: op
-  sjewels.balance.another:
+  satejewels.balance.another:
     default: op
-  sjewels.balance:
+  satejewels.balance:
     default: true
   satejewels.pay:
     default: op

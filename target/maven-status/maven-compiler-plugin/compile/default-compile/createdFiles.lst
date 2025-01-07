@@ -1,5 +1,9 @@
 org\satellite\progiple\satejewels\other\configs\DataConfig.class
 org\satellite\progiple\satejewels\other\configs\Config.class
 org\satellite\progiple\satejewels\other\configs\managers\ConfigManager.class
+org\satellite\progiple\satejewels\other\Tools.class
+org\satellite\progiple\satejewels\other\Placeholders.class
 org\satellite\progiple\satejewels\Command.class
 org\satellite\progiple\satejewels\other\configs\managers\DataManager.class
+org\satellite\progiple\satejewels\api\SJAPI.class
+org\satellite\progiple\satejewels\SateJewels.class
