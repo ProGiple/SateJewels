@@ -22,3 +22,17 @@ sjapi.setJewels(OfflinePlayer player); // set jewels
 sjapi.removeJewels(OfflinePlayer player); // remove jewels
 etc..
 ```
+
+Placeholders for PAPI:
+```java
+%satejewels_name_<name>% // returns a icon/name with id <name> from config.yml
+%satejewels_autoname% // returns a icon/name that depends on the current balance value
+%satejewels_balance% // returns a player balance
+```
+
+Placeholders for SateJewels config:
+```java
+{player} // returns a target player nickname
+{amount} // returns a target amount of jewels
+{name_<id>} // copy of %satejewels_name_<name>%
+```
