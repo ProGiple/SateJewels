@@ -3,8 +3,7 @@ package org.satellite.progiple.satejewels.other;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.satellite.progiple.satejewels.api.SJAPI;
-import org.satellite.progiple.satejewels.other.configs.Config;
+import org.satellite.progiple.satejewels.SateJewels;
 import org.satellite.progiple.satejewels.other.configs.managers.ConfigManager;
 
 import java.util.Map;
@@ -25,7 +24,7 @@ public class Tools {
 
         if (sender == null) return;
         if (message.contains("{name_")) {
-            for (Map.Entry<String, String> entry : SJAPI.getJewelNames().entrySet()) {
+            for (Map.Entry<String, String> entry : SateJewels.getPlugin().getSjapi().getJewelNames().entrySet()) {
                 message = message.replace(String.format("{name_%s}", entry.getKey()), entry.getValue());
             }
         }

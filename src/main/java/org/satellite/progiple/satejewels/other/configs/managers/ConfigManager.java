@@ -4,6 +4,7 @@ import lombok.experimental.UtilityClass;
 import org.bukkit.Bukkit;
 import org.bukkit.Sound;
 import org.bukkit.plugin.Plugin;
+import org.satellite.progiple.satejewels.SateJewels;
 import org.satellite.progiple.satejewels.other.configs.Config;
 
 import java.util.Map;
@@ -12,9 +13,7 @@ import java.util.Map;
 public class ConfigManager {
     private final Config configuration;
     static {
-        Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("SateJewels");
-        assert plugin != null;
-        configuration = new Config(plugin);
+        configuration = new Config(SateJewels.getPlugin());
         reload();
     }
 

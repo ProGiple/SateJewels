@@ -1,15 +1,14 @@
 package org.satellite.progiple.satejewels.other.configs.managers;
 
-import org.bukkit.Bukkit;
-import org.bukkit.plugin.Plugin;
+import lombok.Getter;
+import org.satellite.progiple.satejewels.SateJewels;
 import org.satellite.progiple.satejewels.other.configs.DataConfig;
 
 public class DataManager {
+    @Getter
     private final static DataConfig dataConfig;
     static {
-        Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("SateJewels");
-        assert plugin != null;
-        dataConfig = new DataConfig("data.yml", plugin);
+        dataConfig = new DataConfig("data.yml", SateJewels.getPlugin());
     }
 
     public static void reload() {
@@ -18,9 +17,5 @@ public class DataManager {
 
     public static int getValue(String nick) {
         return dataConfig.getValue(nick);
-    }
-
-    public static void setValue(String nick, int value) {
-        dataConfig.setValue(nick, value);
     }
 }

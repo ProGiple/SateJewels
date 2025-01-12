@@ -9,8 +9,6 @@ import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
 import org.satellite.progiple.satejewels.api.SJAPI;
 import org.satellite.progiple.satejewels.other.Tools;
-import org.satellite.progiple.satejewels.other.configs.Config;
-import org.satellite.progiple.satejewels.other.configs.DataConfig;
 import org.satellite.progiple.satejewels.other.configs.managers.ConfigManager;
 import org.satellite.progiple.satejewels.other.configs.managers.DataManager;
 
@@ -22,6 +20,7 @@ public class Command implements CommandExecutor, TabCompleter {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (args.length >= 1) {
+            SJAPI sjapi = SateJewels.getPlugin().getSjapi();
             switch (args[0]) {
                 case "give", "add":
                     if (hasAdminPerm(sender)) {
@@ -29,7 +28,7 @@ public class Command implements CommandExecutor, TabCompleter {
                             String nick = args[1];
                             int value = Integer.parseInt(args[2]);
 
-                            SJAPI.giveJewels(nick, value);
+                            sjapi.giveJewels(nick, value);
                             Tools.sendMessage(sender, "giveJewels", value, nick, "successful");
                         }
                         else this.noArgsMess(sender);
@@ -64,7 +63,7 @@ public class Command implements CommandExecutor, TabCompleter {
                             String nick = args[1];
                             int value = Integer.parseInt(args[2]);
 
-                            SJAPI.removeJewels(nick, value);
+                            sjapi.removeJewels(nick, value);
                             Tools.sendMessage(sender, "removeJewels", value, nick, "successful");
                         }
                         else this.noArgsMess(sender);
@@ -76,7 +75,7 @@ public class Command implements CommandExecutor, TabCompleter {
                             String nick = args[1];
                             int value = Integer.parseInt(args[2]);
 
-                            if (SJAPI.payJewels(sender.getName(), nick, value)) {
+                            if (sjapi.payJewels(sender.getName(), nick, value)) {
                                 Tools.sendMessage(sender, "payJewels", value, nick, "successful");
                                 Tools.sendMessage(Bukkit.getPlayer(nick), "payedJewels", value, sender.getName(), "successful");
                             }
@@ -92,7 +91,7 @@ public class Command implements CommandExecutor, TabCompleter {
                             String nick = args[1];
                             int value = Integer.parseInt(args[2]);
 
-                            SJAPI.setJewels(nick, value);
+                            sjapi.setJewels(nick, value);
                             Tools.sendMessage(sender, "payJewels", value, nick, "successful");
                         }
                         else this.noArgsMess(sender);

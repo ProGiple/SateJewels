@@ -2,17 +2,23 @@ package org.satellite.progiple.satejewels;
 
 import lombok.Getter;
 import org.bukkit.plugin.java.JavaPlugin;
+import org.satellite.progiple.satejewels.api.SJAPI;
 import org.satellite.progiple.satejewels.other.Placeholders;
+import org.satellite.progiple.satejewels.other.configs.managers.DataManager;
 
 import java.util.Objects;
 
 public final class SateJewels extends JavaPlugin {
     @Getter
     private static SateJewels plugin;
+    @Getter
+    private SJAPI sjapi;
 
     @Override
     public void onEnable() {
         plugin = this;
+        this.sjapi = new SJAPI(DataManager.getDataConfig());
+
         this.saveDefaultConfig();
         Command command = new Command();
         Objects.requireNonNull(getCommand("satejewels")).setTabCompleter(command);
