@@ -10,7 +10,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class Config {
-
     @Getter private Map<String, String> jewelsNames = new HashMap<>();
     private FileConfiguration config;
     private final Plugin plugin;
@@ -25,9 +24,9 @@ public class Config {
 
         ConfigurationSection section = this.config.getConfigurationSection("jewelsSettings.names");
         if (section == null) return;
-        jewelsNames.clear();
+        this.jewelsNames.clear();
         for (String id : section.getKeys(false)) {
-            jewelsNames.put(id, section.getString(id));
+            this.jewelsNames.put(id, section.getString(id));
         }
     }
 

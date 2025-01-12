@@ -15,6 +15,7 @@ public class ConfigManager {
         Plugin plugin = Bukkit.getServer().getPluginManager().getPlugin("SateJewels");
         assert plugin != null;
         configuration = new Config(plugin);
+        reload();
     }
 
     public String getString(String path) {
