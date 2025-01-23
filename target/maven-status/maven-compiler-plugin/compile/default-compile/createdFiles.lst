@@ -1,9 +1,11 @@
-org\satellite\progiple\satejewels\other\configs\DataConfig.class
-org\satellite\progiple\satejewels\other\configs\Config.class
-org\satellite\progiple\satejewels\other\configs\managers\ConfigManager.class
-org\satellite\progiple\satejewels\other\Tools.class
-org\satellite\progiple\satejewels\other\Placeholders.class
+org\satellite\progiple\satejewels\Utils\Placeholders.class
+org\satellite\progiple\satejewels\storages\Storage.class
+org\satellite\progiple\satejewels\storages\configs\managers\ConfigManager.class
 org\satellite\progiple\satejewels\Command.class
-org\satellite\progiple\satejewels\other\configs\managers\DataManager.class
 org\satellite\progiple\satejewels\api\SJAPI.class
 org\satellite\progiple\satejewels\SateJewels.class
+org\satellite\progiple\satejewels\PPListener.class
+org\satellite\progiple\satejewels\Utils\Tools.class
+org\satellite\progiple\satejewels\storages\db\DataBase.class
+org\satellite\progiple\satejewels\storages\configs\Config.class
+org\satellite\progiple\satejewels\storages\configs\DataConfig.class

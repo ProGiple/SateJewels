@@ -1,9 +1,11 @@
 package org.satellite.progiple.satejewels;
 
 import lombok.Getter;
+import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.java.JavaPlugin;
 import org.satellite.progiple.satejewels.Utils.Placeholders;
+import org.satellite.progiple.satejewels.api.SJAPI;
 import org.satellite.progiple.satejewels.storages.Storage;
 import org.satellite.progiple.satejewels.storages.configs.DataConfig;
 import org.satellite.progiple.satejewels.storages.configs.managers.ConfigManager;
@@ -33,7 +35,9 @@ public final class SateJewels extends JavaPlugin {
 
         } else this.storage = new DataConfig(storageSection.getString("configuration.fileName"));
 
-
+        if (getServer().getPluginManager().getPlugin("PlayerPoints") != null) {
+            Bukkit.getServer().getPluginManager().registerEvents(new PPListener(), plugin);
+        }
 
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Placeholders placeholders = new Placeholders();

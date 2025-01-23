@@ -39,4 +39,5 @@ public class Config {
     public Sound getSound(String type) {
         return Sound.valueOf(this.getString(String.format("sounds.%s", type)));
     }
+    public boolean getBool(String path) {return this.config.getBoolean(path);}
 }

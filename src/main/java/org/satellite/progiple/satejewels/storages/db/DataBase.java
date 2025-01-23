@@ -4,6 +4,7 @@ import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.satellite.progiple.satejewels.SateJewels;
+import org.satellite.progiple.satejewels.Utils.Tools;
 import org.satellite.progiple.satejewels.storages.Storage;
 
 import java.sql.*;
@@ -80,7 +81,7 @@ public class DataBase implements Storage {
                 throw new RuntimeException(e);
             }
         });
-
+        Tools.syncSJtoPP(playerName);
     }
 
     @Override

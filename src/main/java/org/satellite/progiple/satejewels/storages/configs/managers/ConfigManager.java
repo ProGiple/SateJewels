@@ -33,4 +33,8 @@ public class ConfigManager {
     public static ConfigurationSection getSection(String storage) {
         return configuration.getSection(storage);
     }
+
+    public static boolean getBool(String path) {
+        return configuration.getBool(path);
+    }
 }

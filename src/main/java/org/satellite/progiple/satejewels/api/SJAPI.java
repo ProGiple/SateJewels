@@ -9,7 +9,6 @@ import java.util.Map;
 import java.util.UUID;
 
 public class SJAPI {
-
     public static int getJewels(String nick) {
         return SateJewels.getPlugin().getStorage().getJewels(nick);
     }

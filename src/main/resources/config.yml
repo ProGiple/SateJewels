@@ -1,18 +1,15 @@
 storage:
-  storageType: ""
-
+  storageType: h2 # h2 или mysql, h2 -> хранение в файле
   mySql:
     username: ""
     password: ''
     port: 3306
-
     dbName: ''
     tableName: ''
-
   configuration:
     fileName: 'playersData.yml'
-
 jewelsSettings:
+  playerPointsAutoTransfer: true # автоматически создать мост между PlayerPoints и SateJewels? (будут синхронизироваться данные плагинов)
   names:
     0st: 'Аметист'
     1st: 'Аметистов'
