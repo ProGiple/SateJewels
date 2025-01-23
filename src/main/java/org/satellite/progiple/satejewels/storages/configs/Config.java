@@ -1,4 +1,4 @@
-package org.satellite.progiple.satejewels.other.configs;
+package org.satellite.progiple.satejewels.storages.configs;
 
 import lombok.Getter;
 import org.bukkit.Sound;
@@ -33,7 +33,9 @@ public class Config {
     public String getString(String path) {
         return this.config.getString(path);
     }
-
+    public ConfigurationSection getSection(String path) {
+        return this.config.getConfigurationSection(path);
+    }
     public Sound getSound(String type) {
         return Sound.valueOf(this.getString(String.format("sounds.%s", type)));
     }

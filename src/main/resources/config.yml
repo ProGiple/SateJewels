@@ -1,3 +1,17 @@
+storage:
+  storageType: ""
+
+  mySql:
+    username: ""
+    password: ''
+    port: 3306
+
+    dbName: ''
+    tableName: ''
+
+  configuration:
+    fileName: 'playersData.yml'
+
 jewelsSettings:
   names:
     0st: 'Аметист'

@@ -1,11 +1,10 @@
-package org.satellite.progiple.satejewels.other;
+package org.satellite.progiple.satejewels.Utils;
 
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.satellite.progiple.satejewels.api.SJAPI;
-import org.satellite.progiple.satejewels.other.configs.Config;
-import org.satellite.progiple.satejewels.other.configs.managers.ConfigManager;
+import org.satellite.progiple.satejewels.storages.configs.managers.ConfigManager;
 
 import java.util.Map;
 

@@ -1,20 +1,20 @@
-package org.satellite.progiple.satejewels.other.configs;
+package org.satellite.progiple.satejewels.storages.configs;
 
 import lombok.Getter;
 import lombok.SneakyThrows;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.satellite.progiple.satejewels.SateJewels;
+import org.satellite.progiple.satejewels.storages.Storage;
 
 import java.io.File;
 
-public class DataConfig {
+public class DataConfig implements Storage {
 
     @Getter private FileConfiguration config;
     private final File file;
     public DataConfig(String fileName) {
-        SateJewels plugin = (SateJewels) Bukkit.getServer().getPluginManager().getPlugin(SateJewels.class.getName());
+        SateJewels plugin = SateJewels.getPlugin();
         assert plugin != null;
         this.file = new File(plugin.getDataFolder(), fileName);
         this.config = YamlConfiguration.loadConfiguration(this.file);
@@ -24,14 +24,21 @@ public class DataConfig {
         this.config = YamlConfiguration.loadConfiguration(this.file);
     }
 
-    public int getValue(String nick) {
-        return this.config.getInt(String.format("players.%s", nick));
+    @Override
+    public int getJewels(String playerName) {
+        return this.config.getInt(String.format("players.%s", playerName));
     }
 
     @SneakyThrows
-    public void setValue(String nick, int value) {
-        if (value < 0) value = Math.abs(value);
-        this.config.set(String.format("players.%s", nick), value);
+    @Override
+    public void setJewels(String playerName, int amount) {
+        if (amount < 0) amount = Math.abs(amount);
+        this.config.set(String.format("players.%s", playerName), amount);
         this.config.save(this.file);
+    }
+
+    @Override
+    public void clear() {
+        this.config.getKeys(false).forEach(k -> this.config.set(k, null));
     }
 }

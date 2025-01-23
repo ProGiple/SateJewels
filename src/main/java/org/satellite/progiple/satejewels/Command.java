@@ -7,12 +7,11 @@ import org.bukkit.command.TabCompleter;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.satellite.progiple.satejewels.Utils.Tools;
 import org.satellite.progiple.satejewels.api.SJAPI;
-import org.satellite.progiple.satejewels.other.Tools;
-import org.satellite.progiple.satejewels.other.configs.Config;
-import org.satellite.progiple.satejewels.other.configs.DataConfig;
-import org.satellite.progiple.satejewels.other.configs.managers.ConfigManager;
-import org.satellite.progiple.satejewels.other.configs.managers.DataManager;
+import org.satellite.progiple.satejewels.storages.Storage;
+import org.satellite.progiple.satejewels.storages.configs.DataConfig;
+import org.satellite.progiple.satejewels.storages.configs.managers.ConfigManager;
 
 import java.util.ArrayList;
 import java.util.Arrays;
@@ -38,22 +37,26 @@ public class Command implements CommandExecutor, TabCompleter {
                 case "reload":
                     if (hasAdminPerm(sender)) {
                         ConfigManager.reload();
-                        DataManager.reload();
+                        if (SateJewels.getPlugin().getStorage() instanceof DataConfig) {
+                            ((DataConfig) SateJewels.getPlugin().getStorage()).reload();
+                        }
+
                         Tools.sendMessage(sender, "reloadPlugin", "successful");
                     }
                     break;
                 case "balance", "bal":
+                    Storage storage = SateJewels.getPlugin().getStorage();
                     if (args.length >= 2) {
                         String nick = args[1];
                         if (sender.hasPermission("satejewels.balance.another")) {
-                            Tools.sendMessage(sender, "playerBalance", DataManager.getValue(nick), nick, "successful");
+                            Tools.sendMessage(sender, "playerBalance", storage.getJewels(nick), nick, "successful");
                         }
                         else Tools.sendMessage(sender, "noPerm", "error");
                     }
                     else {
                         String nick = sender.getName();
                         if (sender.hasPermission("satejewels.balance")) {
-                            Tools.sendMessage(sender, "balance", DataManager.getValue(nick), "", "successful");
+                            Tools.sendMessage(sender, "balance", storage.getJewels(nick), "", "successful");
                         }
                         else Tools.sendMessage(sender, "noPerm", "error");
                     }

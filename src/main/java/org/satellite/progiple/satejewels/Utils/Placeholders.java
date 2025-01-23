@@ -1,11 +1,10 @@
-package org.satellite.progiple.satejewels.other;
+package org.satellite.progiple.satejewels.Utils;
 
 import me.clip.placeholderapi.expansion.PlaceholderExpansion;
 import org.bukkit.OfflinePlayer;
 import org.jetbrains.annotations.NotNull;
 import org.satellite.progiple.satejewels.api.SJAPI;
-import org.satellite.progiple.satejewels.other.configs.Config;
-import org.satellite.progiple.satejewels.other.configs.managers.ConfigManager;
+import org.satellite.progiple.satejewels.storages.configs.managers.ConfigManager;
 
 public class Placeholders extends PlaceholderExpansion {
 

@@ -2,8 +2,8 @@ package org.satellite.progiple.satejewels.api;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
-import org.satellite.progiple.satejewels.other.configs.managers.ConfigManager;
-import org.satellite.progiple.satejewels.other.configs.managers.DataManager;
+import org.satellite.progiple.satejewels.SateJewels;
+import org.satellite.progiple.satejewels.storages.configs.managers.ConfigManager;
 
 import java.util.Map;
 import java.util.UUID;
@@ -11,7 +11,7 @@ import java.util.UUID;
 public class SJAPI {
 
     public static int getJewels(String nick) {
-        return DataManager.getValue(nick);
+        return SateJewels.getPlugin().getStorage().getJewels(nick);
     }
 
     public static int getJewels(OfflinePlayer offlinePlayer) {
@@ -23,7 +23,7 @@ public class SJAPI {
     }
 
     public static void giveJewels(String nick, int value) {
-        DataManager.setValue(nick, SJAPI.getJewels(nick) + value);
+        SateJewels.getPlugin().getStorage().setJewels(nick, SJAPI.getJewels(nick) + value);
     }
 
     public static void giveJewels(OfflinePlayer offlinePlayer, int value) {
@@ -35,7 +35,7 @@ public class SJAPI {
     }
 
     public static void removeJewels(String nick, int value) {
-        DataManager.setValue(nick, SJAPI.getJewels(nick) - value);
+        SateJewels.getPlugin().getStorage().setJewels(nick, SJAPI.getJewels(nick) - value);
     }
 
     public static void removeJewels(OfflinePlayer offlinePlayer, int value) {
@@ -56,7 +56,7 @@ public class SJAPI {
     }
 
     public static void setJewels(String nick, int value) {
-        DataManager.setValue(nick, value);
+        SateJewels.getPlugin().getStorage().setJewels(nick, value);
     }
 
     public static void setJewels(OfflinePlayer offlinePlayer, int value) {
