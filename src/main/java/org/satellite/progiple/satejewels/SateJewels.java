@@ -18,10 +18,13 @@ public final class SateJewels extends JavaPlugin {
     private static SateJewels plugin;
     @Getter
     private Storage storage;
+    @Getter
+    private SJAPI sjapi;
 
     @Override
     public void onEnable() {
         plugin = this;
+        sjapi = new SJAPI();
         this.saveDefaultConfig();
         Command command = new Command();
         Objects.requireNonNull(getCommand("satejewels")).setTabCompleter(command);

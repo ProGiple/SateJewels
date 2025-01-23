@@ -9,68 +9,68 @@ import java.util.Map;
 import java.util.UUID;
 
 public class SJAPI {
-    public static int getJewels(String nick) {
+    public int getJewels(String nick) {
         return SateJewels.getPlugin().getStorage().getJewels(nick);
     }
 
-    public static int getJewels(OfflinePlayer offlinePlayer) {
-        return SJAPI.getJewels(offlinePlayer.getName());
+    public int getJewels(OfflinePlayer offlinePlayer) {
+        return this.getJewels(offlinePlayer.getName());
     }
 
-    public static int getJewels(UUID uuid) {
-        return SJAPI.getJewels(Bukkit.getOfflinePlayer(uuid));
+    public int getJewels(UUID uuid) {
+        return this.getJewels(Bukkit.getOfflinePlayer(uuid));
     }
 
-    public static void giveJewels(String nick, int value) {
-        SateJewels.getPlugin().getStorage().setJewels(nick, SJAPI.getJewels(nick) + value);
+    public void giveJewels(String nick, int value) {
+        SateJewels.getPlugin().getStorage().setJewels(nick, this.getJewels(nick) + value);
     }
 
-    public static void giveJewels(OfflinePlayer offlinePlayer, int value) {
-        SJAPI.giveJewels(offlinePlayer.getName(), value);
+    public void giveJewels(OfflinePlayer offlinePlayer, int value) {
+        this.giveJewels(offlinePlayer.getName(), value);
     }
 
-    public static void giveJewels(UUID uuid, int value) {
-        SJAPI.giveJewels(Bukkit.getOfflinePlayer(uuid), value);
+    public void giveJewels(UUID uuid, int value) {
+        this.giveJewels(Bukkit.getOfflinePlayer(uuid), value);
     }
 
-    public static void removeJewels(String nick, int value) {
-        SateJewels.getPlugin().getStorage().setJewels(nick, SJAPI.getJewels(nick) - value);
+    public void removeJewels(String nick, int value) {
+        SateJewels.getPlugin().getStorage().setJewels(nick, this.getJewels(nick) - value);
     }
 
-    public static void removeJewels(OfflinePlayer offlinePlayer, int value) {
-        SJAPI.removeJewels(offlinePlayer.getName(), value);
+    public void removeJewels(OfflinePlayer offlinePlayer, int value) {
+        this.removeJewels(offlinePlayer.getName(), value);
     }
 
-    public static void removeJewels(UUID uuid, int value) {
-        SJAPI.removeJewels(Bukkit.getOfflinePlayer(uuid), value);
+    public void removeJewels(UUID uuid, int value) {
+        this.removeJewels(Bukkit.getOfflinePlayer(uuid), value);
     }
 
-    public static boolean payJewels(String fromPlayerNick, String toPlayerNick, int value) {
-        if (SJAPI.getJewels(fromPlayerNick) >= value) {
-            SJAPI.removeJewels(fromPlayerNick, value);
-            SJAPI.giveJewels(toPlayerNick, value);
+    public boolean payJewels(String fromPlayerNick, String toPlayerNick, int value) {
+        if (this.getJewels(fromPlayerNick) >= value) {
+            this.removeJewels(fromPlayerNick, value);
+            this.giveJewels(toPlayerNick, value);
             return true;
         }
         return false;
     }
 
-    public static void setJewels(String nick, int value) {
+    public void setJewels(String nick, int value) {
         SateJewels.getPlugin().getStorage().setJewels(nick, value);
     }
 
-    public static void setJewels(OfflinePlayer offlinePlayer, int value) {
-        SJAPI.setJewels(offlinePlayer.getName(), value);
+    public void setJewels(OfflinePlayer offlinePlayer, int value) {
+        this.setJewels(offlinePlayer.getName(), value);
     }
 
-    public static void setJewels(UUID uuid, int value) {
-        SJAPI.setJewels(Bukkit.getOfflinePlayer(uuid), value);
+    public void setJewels(UUID uuid, int value) {
+        this.setJewels(Bukkit.getOfflinePlayer(uuid), value);
     }
 
-    public static Map<String, String> getJewelNames() {
+    public Map<String, String> getJewelNames() {
         return ConfigManager.getJewelsNames();
     }
 
-    public static String getJewelName(String id) {
-        return SJAPI.getJewelNames().get(id);
+    public String getJewelName(String id) {
+        return this.getJewelNames().get(id);
     }
 }

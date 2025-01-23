@@ -28,7 +28,7 @@ public class Command implements CommandExecutor, TabCompleter {
                             String nick = args[1];
                             int value = Integer.parseInt(args[2]);
 
-                            SJAPI.giveJewels(nick, value);
+                            SateJewels.getPlugin().getSjapi().giveJewels(nick, value);
                             Tools.sendMessage(sender, "giveJewels", value, nick, "successful");
                         }
                         else this.noArgsMess(sender);
@@ -67,7 +67,7 @@ public class Command implements CommandExecutor, TabCompleter {
                             String nick = args[1];
                             int value = Integer.parseInt(args[2]);
 
-                            SJAPI.removeJewels(nick, value);
+                            SateJewels.getPlugin().getSjapi().removeJewels(nick, value);
                             Tools.sendMessage(sender, "removeJewels", value, nick, "successful");
                         }
                         else this.noArgsMess(sender);
@@ -79,7 +79,7 @@ public class Command implements CommandExecutor, TabCompleter {
                             String nick = args[1];
                             int value = Integer.parseInt(args[2]);
 
-                            if (SJAPI.payJewels(sender.getName(), nick, value)) {
+                            if (SateJewels.getPlugin().getSjapi().payJewels(sender.getName(), nick, value)) {
                                 Tools.sendMessage(sender, "payJewels", value, nick, "successful");
                                 Tools.sendMessage(Bukkit.getPlayer(nick), "payedJewels", value, sender.getName(), "successful");
                             }
@@ -95,7 +95,7 @@ public class Command implements CommandExecutor, TabCompleter {
                             String nick = args[1];
                             int value = Integer.parseInt(args[2]);
 
-                            SJAPI.setJewels(nick, value);
+                            SateJewels.getPlugin().getSjapi().setJewels(nick, value);
                             Tools.sendMessage(sender, "payJewels", value, nick, "successful");
                         }
                         else this.noArgsMess(sender);
