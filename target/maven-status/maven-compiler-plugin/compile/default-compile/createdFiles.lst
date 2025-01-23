@@ -4,7 +4,6 @@ org\satellite\progiple\satejewels\storages\configs\managers\ConfigManager.class
 org\satellite\progiple\satejewels\Command.class
 org\satellite\progiple\satejewels\api\SJAPI.class
 org\satellite\progiple\satejewels\SateJewels.class
-org\satellite\progiple\satejewels\PPListener.class
 org\satellite\progiple\satejewels\Utils\Tools.class
 org\satellite\progiple\satejewels\storages\db\DataBase.class
 org\satellite\progiple\satejewels\storages\configs\Config.class

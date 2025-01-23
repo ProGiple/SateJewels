@@ -15,6 +15,7 @@ public class Config {
     private FileConfiguration config;
     public Config() {
         this.config = SateJewels.getPlugin().getConfig();
+        this.reload();
     }
 
     public void reload() {

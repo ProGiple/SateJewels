@@ -38,10 +38,6 @@ public final class SateJewels extends JavaPlugin {
 
         } else this.storage = new DataConfig(storageSection.getString("configuration.fileName"));
 
-        if (getServer().getPluginManager().getPlugin("PlayerPoints") != null) {
-            Bukkit.getServer().getPluginManager().registerEvents(new PPListener(), plugin);
-        }
-
         if (getServer().getPluginManager().getPlugin("PlaceholderAPI") != null) {
             Placeholders placeholders = new Placeholders();
             placeholders.register();
