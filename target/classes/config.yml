@@ -17,6 +17,7 @@ jewelsSettings:
     icon: '₳'
 messages: # пустая строка = выключено
   giveJewels: 'Вы выдали игроку {player} x{amount}{name_icon}'
+  giveAllJewels: 'Вы выдали всем игрокам x{amount}{name_icon}'
   balance: 'Ваш баланс: x{amount}{name_icon}'
   playerBalance: 'Баланса игрока {player}: x{amount}{name_icon}'
   removeJewels: 'Вы забрали у игрока {player} x{amount}{name_icon}'

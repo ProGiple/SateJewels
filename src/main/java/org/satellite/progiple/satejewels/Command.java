@@ -16,6 +16,7 @@ import org.satellite.progiple.satejewels.storages.configs.managers.ConfigManager
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.stream.Collectors;
 
 public class Command implements CommandExecutor, TabCompleter {
     @Override
@@ -30,6 +31,17 @@ public class Command implements CommandExecutor, TabCompleter {
 
                             SateJewels.getPlugin().getSjapi().giveJewels(nick, value);
                             Tools.sendMessage(sender, "giveJewels", value, nick, "successful");
+                        }
+                        else this.noArgsMess(sender);
+                    }
+                    break;
+                case "giveAll", "addAll":
+                    if (hasAdminPerm(sender)) {
+                        if (args.length >= 2) {
+                            int value = Integer.parseInt(args[1]);
+                            Bukkit.getOnlinePlayers().forEach(player ->
+                                    SateJewels.getPlugin().getSjapi().giveJewels(player.getName(), value));
+                            Tools.sendMessage(sender, "giveAllJewels", value, " ", "successful");
                         }
                         else this.noArgsMess(sender);
                     }
@@ -119,20 +131,22 @@ public class Command implements CommandExecutor, TabCompleter {
 
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, org.bukkit.command.@NotNull Command command, @NotNull String s, @NotNull String[] strings) {
-        List<String> list = new ArrayList<>();
         if (strings.length == 1) {
-            list.addAll(Arrays.asList("add", "reload", "take", "set", "pay", "balance"));
+            return List.of("add", "addAll", "reload", "take", "set", "pay", "balance");
         }
         else if (strings.length == 2 && (strings[0].equals("add") || strings[0].equals("set")
                 || strings[0].equals("take") || strings[0].equals("pay") || strings[0].equals("balance"))) {
-            for (Player player : Bukkit.getOnlinePlayers()) {
-                list.add(player.getName());
-            }
+            return Bukkit.getOnlinePlayers()
+                    .stream()
+                    .map(Player::getName)
+                    .filter(name -> name.startsWith(strings[1]))
+                    .collect(Collectors.toList());
         }
-        else if (strings.length == 3 && (strings[0].equals("add") || strings[0].equals("set")
-                || strings[0].equals("take") || strings[0].equals("pay"))) {
-            list.add("<amount>");
+        else if ((strings.length == 3 && (strings[0].equals("add") || strings[0].equals("set")
+                || strings[0].equals("take") || strings[0].equals("pay"))) ||
+                (strings.length == 2 && strings[0].equals("addAll"))) {
+            return List.of("<amount>");
         }
-        return list;
+        return List.of();
     }
 }
