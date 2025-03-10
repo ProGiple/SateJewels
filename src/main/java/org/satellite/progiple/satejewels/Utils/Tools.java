@@ -50,4 +50,16 @@ public class Tools {
         if (offlinePlayer == null) return;
         ppapi.set(offlinePlayer.getUniqueId(), SateJewels.getPlugin().getSjapi().getJewels(nick));
     }
+
+    public static int toInt(String value) {
+        int endedValue = 0;
+        if (value.contains(".")) {
+            String[] splited = value.split("\\.");
+            if (splited.length >= 2) {
+                int decimal = Integer.parseInt(splited[0]);
+                endedValue = Integer.parseInt(splited[1]) >= 5 ? decimal + 1 : decimal;
+            }
+        }
+        return endedValue;
+    }
 }

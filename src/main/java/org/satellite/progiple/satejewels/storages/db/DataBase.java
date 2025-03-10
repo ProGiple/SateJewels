@@ -47,7 +47,8 @@ public class DataBase implements Storage {
 
     @Override
     @SneakyThrows
-    public int getJewels(String playerName) {
+    public int getJewels(String nick) {
+        String playerName = nick.toLowerCase();
         PreparedStatement statement = this.connection.prepareStatement(String.format("SELECT JewelsAmount FROM %s WHERE Player=? FOR UPDATE", this.tableName));
 
         statement.setString(1, playerName);
@@ -57,7 +58,8 @@ public class DataBase implements Storage {
     }
 
     @Override
-    public void setJewels(String playerName, int amount) {
+    public void setJewels(String nick, int amount) {
+        String playerName = nick.toLowerCase();
         Bukkit.getScheduler().runTaskAsynchronously(SateJewels.getPlugin(), () -> {
             try {
                 PreparedStatement statement = this.connection.prepareStatement(String.format("SELECT JewelsAmount FROM %s WHERE Player=? FOR UPDATE", this.tableName));

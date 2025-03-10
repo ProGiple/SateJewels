@@ -14,12 +14,9 @@ import org.satellite.progiple.satejewels.storages.db.DataBase;
 import java.util.Objects;
 
 public final class SateJewels extends JavaPlugin {
-    @Getter
-    private static SateJewels plugin;
-    @Getter
-    private Storage storage;
-    @Getter
-    private SJAPI sjapi;
+    @Getter private static SateJewels plugin;
+    @Getter private Storage storage;
+    @Getter private SJAPI sjapi;
 
     @Override
     public void onEnable() {
