@@ -40,17 +40,6 @@ public class Tools {
         }
     }
 
-    public static void syncSJtoPP(String nick) {
-        if (!ConfigManager.getBool("jewelsSettings.playerPointsAutoTransfer") ||
-                Bukkit.getServer().getPluginManager().getPlugin("PlayerPoints") == null) return;
-        PlayerPointsAPI ppapi = PlayerPoints.getInstance().getAPI();
-        if (ppapi == null) return;
-
-        OfflinePlayer offlinePlayer = Bukkit.getOfflinePlayerIfCached(nick);
-        if (offlinePlayer == null) return;
-        ppapi.set(offlinePlayer.getUniqueId(), SateJewels.getPlugin().getSjapi().getJewels(nick));
-    }
-
     public static int toInt(String value) {
         int endedValue = 0;
         if (value.contains(".")) {

@@ -55,7 +55,6 @@ public class DataConfig implements Storage {
 
         this.config.set(String.format("players.%s", nick), amount);
         this.config.save(this.file);
-        Tools.syncSJtoPP(nick);
     }
 
     @Override

@@ -83,7 +83,6 @@ public class DataBase implements Storage {
                 throw new RuntimeException(e);
             }
         });
-        Tools.syncSJtoPP(playerName);
     }
 
     @Override
