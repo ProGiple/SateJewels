@@ -44,6 +44,7 @@ public class Tools {
                 endedValue = Integer.parseInt(splited[1]) >= 5 ? decimal + 1 : decimal;
             }
         }
+        else endedValue = Integer.parseInt(value);
         return endedValue;
     }
 }
