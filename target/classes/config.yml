@@ -9,7 +9,6 @@ storage:
   configuration:
     fileName: 'playersData.yml'
 jewelsSettings:
-  playerPointsAutoTransfer: true # автоматически создать мост между PlayerPoints и SateJewels? (будут синхронизироваться данные плагинов)
   names:
     0st: 'Аметист'
     1st: 'Аметистов'
