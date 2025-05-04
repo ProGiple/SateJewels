@@ -6,7 +6,6 @@ import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.configuration.file.YamlConfiguration;
 import org.satellite.progiple.satejewels.SateJewels;
-import org.satellite.progiple.satejewels.Utils.Tools;
 import org.satellite.progiple.satejewels.storages.Storage;
 
 import java.io.File;
@@ -19,7 +18,7 @@ public class DataConfig implements Storage {
 
     @SneakyThrows
     public DataConfig(String fileName) {
-        SateJewels plugin = SateJewels.getPlugin();
+        SateJewels plugin = SateJewels.getINSTANCE();
         assert plugin != null;
         this.file = new File(plugin.getDataFolder(), fileName);
         this.config = YamlConfiguration.loadConfiguration(this.file);

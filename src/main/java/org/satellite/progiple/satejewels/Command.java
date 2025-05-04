@@ -1,22 +1,20 @@
 package org.satellite.progiple.satejewels;
 
 import org.bukkit.Bukkit;
-import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
-import org.bukkit.command.TabCompleter;
+import org.bukkit.command.TabExecutor;
 import org.bukkit.entity.Player;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
+import org.novasparkle.lunaspring.API.util.utilities.Utils;
 import org.satellite.progiple.satejewels.Utils.Tools;
-import org.satellite.progiple.satejewels.api.SJAPI;
 import org.satellite.progiple.satejewels.storages.Storage;
 import org.satellite.progiple.satejewels.storages.configs.DataConfig;
 import org.satellite.progiple.satejewels.storages.configs.managers.ConfigManager;
 
 import java.util.List;
-import java.util.stream.Collectors;
 
-public class Command implements CommandExecutor, TabCompleter {
+public class Command implements TabExecutor {
     @Override
     public boolean onCommand(@NotNull CommandSender sender, org.bukkit.command.@NotNull Command command, @NotNull String s, @NotNull String[] args) {
         if (args.length >= 1) {
@@ -25,9 +23,9 @@ public class Command implements CommandExecutor, TabCompleter {
                     if (hasAdminPerm(sender)) {
                         if (args.length >= 3) {
                             String nick = args[1];
-                            int value = Tools.toInt(args[2]);
+                            int value = Tools.toInt(nick, args[2]);
 
-                            SateJewels.getPlugin().getSjapi().giveJewels(nick, value);
+                            SateJewels.getINSTANCE().getSjapi().giveJewels(nick, value);
                             Tools.sendMessage(sender, "giveJewels", value, nick, "successful");
                         }
                         else this.noArgsMess(sender);
@@ -36,10 +34,12 @@ public class Command implements CommandExecutor, TabCompleter {
                 case "giveAll", "addAll":
                     if (hasAdminPerm(sender)) {
                         if (args.length >= 2) {
-                            int value = Tools.toInt(args[1]);
-                            Bukkit.getOnlinePlayers().forEach(player ->
-                                    SateJewels.getPlugin().getSjapi().giveJewels(player.getName(), value));
-                            Tools.sendMessage(sender, "giveAllJewels", value, " ", "successful");
+                            Bukkit.getOnlinePlayers().forEach(player -> {
+                                String nick = player.getName();
+                                int value = Tools.toInt(nick, args[1]);
+                                SateJewels.getINSTANCE().getSjapi().giveJewels(nick, value);
+                            });
+                            Tools.sendMessage(sender, "giveAllJewels", args[1], " ", "successful");
                         }
                         else this.noArgsMess(sender);
                     }
@@ -47,15 +47,15 @@ public class Command implements CommandExecutor, TabCompleter {
                 case "reload":
                     if (hasAdminPerm(sender)) {
                         ConfigManager.reload();
-                        if (SateJewels.getPlugin().getStorage() instanceof DataConfig) {
-                            ((DataConfig) SateJewels.getPlugin().getStorage()).reload();
+                        if (SateJewels.getINSTANCE().getStorage() instanceof DataConfig) {
+                            ((DataConfig) SateJewels.getINSTANCE().getStorage()).reload();
                         }
 
                         Tools.sendMessage(sender, "reloadPlugin", "successful");
                     }
                     break;
                 case "balance", "bal":
-                    Storage storage = SateJewels.getPlugin().getStorage();
+                    Storage storage = SateJewels.getINSTANCE().getStorage();
                     if (args.length >= 2) {
                         String nick = args[1];
                         if (sender.hasPermission("satejewels.balance.another")) {
@@ -75,9 +75,9 @@ public class Command implements CommandExecutor, TabCompleter {
                     if (hasAdminPerm(sender)) {
                         if (args.length >= 3) {
                             String nick = args[1];
-                            int value = Tools.toInt(args[2]);
+                            int value = Tools.toInt(nick, args[2]);
 
-                            SateJewels.getPlugin().getSjapi().removeJewels(nick, value);
+                            SateJewels.getINSTANCE().getSjapi().removeJewels(nick, value);
                             Tools.sendMessage(sender, "removeJewels", value, nick, "successful");
                         }
                         else this.noArgsMess(sender);
@@ -87,9 +87,9 @@ public class Command implements CommandExecutor, TabCompleter {
                     if (sender.hasPermission("satejewels.pay")) {
                         if (args.length >= 3) {
                             String nick = args[1];
-                            int value = Tools.toInt(args[2]);
+                            int value = Tools.toInt(nick, args[2]);
 
-                            if (SateJewels.getPlugin().getSjapi().payJewels(sender.getName(), nick, value)) {
+                            if (SateJewels.getINSTANCE().getSjapi().payJewels(sender.getName(), nick, value)) {
                                 Tools.sendMessage(sender, "payJewels", value, nick, "successful");
                                 Tools.sendMessage(Bukkit.getPlayer(nick), "payedJewels", value, sender.getName(), "successful");
                             }
@@ -103,9 +103,9 @@ public class Command implements CommandExecutor, TabCompleter {
                     if (hasAdminPerm(sender)) {
                         if (args.length >= 3) {
                             String nick = args[1];
-                            int value = Tools.toInt(args[2]);
+                            int value = Tools.toInt(nick, args[2]);
 
-                            SateJewels.getPlugin().getSjapi().setJewels(nick, value);
+                            SateJewels.getINSTANCE().getSjapi().setJewels(nick, value);
                             Tools.sendMessage(sender, "payJewels", value, nick, "successful");
                         }
                         else this.noArgsMess(sender);
@@ -130,15 +130,11 @@ public class Command implements CommandExecutor, TabCompleter {
     @Override
     public @Nullable List<String> onTabComplete(@NotNull CommandSender commandSender, org.bukkit.command.@NotNull Command command, @NotNull String s, @NotNull String[] strings) {
         if (strings.length == 1) {
-            return List.of("add", "addAll", "reload", "take", "set", "pay", "balance");
+            return Utils.tabCompleterFiltering(List.of("add", "addAll", "reload", "take", "set", "pay", "balance"), strings[0]);
         }
         else if (strings.length == 2 && (strings[0].equals("add") || strings[0].equals("set")
                 || strings[0].equals("take") || strings[0].equals("pay") || strings[0].equals("balance"))) {
-            return Bukkit.getOnlinePlayers()
-                    .stream()
-                    .map(Player::getName)
-                    .filter(name -> name.startsWith(strings[1]))
-                    .collect(Collectors.toList());
+            return Utils.getPlayerNicks(strings[1]);
         }
         else if ((strings.length == 3 && (strings[0].equals("add") || strings[0].equals("set")
                 || strings[0].equals("take") || strings[0].equals("pay"))) ||

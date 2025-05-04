@@ -1,9 +1,13 @@
 name: SateJewels
-version: '2.0.3.5'
+version: '2.0.6'
 main: org.satellite.progiple.satejewels.SateJewels
 api-version: '1.16'
+depend:
+  - LunaSpring
 softdepend:
   - PlaceholderAPI
+loadbefore:
+  - zAuctionHouseV3
 commands:
   satejewels:
     aliases:

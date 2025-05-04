@@ -10,7 +10,7 @@ import java.util.UUID;
 
 public class SJAPI {
     public int getJewels(String nick) {
-        return SateJewels.getPlugin().getStorage().getJewels(nick);
+        return SateJewels.getINSTANCE().getStorage().getJewels(nick);
     }
 
     public int getJewels(OfflinePlayer offlinePlayer) {
@@ -22,7 +22,7 @@ public class SJAPI {
     }
 
     public void giveJewels(String nick, int value) {
-        SateJewels.getPlugin().getStorage().setJewels(nick, this.getJewels(nick) + value);
+        SateJewels.getINSTANCE().getStorage().setJewels(nick, this.getJewels(nick) + value);
     }
 
     public void giveJewels(OfflinePlayer offlinePlayer, int value) {
@@ -34,7 +34,7 @@ public class SJAPI {
     }
 
     public void removeJewels(String nick, int value) {
-        SateJewels.getPlugin().getStorage().setJewels(nick, this.getJewels(nick) - value);
+        SateJewels.getINSTANCE().getStorage().setJewels(nick, this.getJewels(nick) - value);
     }
 
     public void removeJewels(OfflinePlayer offlinePlayer, int value) {
@@ -55,7 +55,7 @@ public class SJAPI {
     }
 
     public void setJewels(String nick, int value) {
-        SateJewels.getPlugin().getStorage().setJewels(nick, value);
+        SateJewels.getINSTANCE().getStorage().setJewels(nick, value);
     }
 
     public void setJewels(OfflinePlayer offlinePlayer, int value) {

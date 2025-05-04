@@ -4,7 +4,6 @@ import lombok.SneakyThrows;
 import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
 import org.satellite.progiple.satejewels.SateJewels;
-import org.satellite.progiple.satejewels.Utils.Tools;
 import org.satellite.progiple.satejewels.storages.Storage;
 
 import java.sql.*;
@@ -29,7 +28,7 @@ public class DataBase implements Storage {
     }
 
     public void initialize() throws SQLException, ClassNotFoundException {
-        synchronized (SateJewels.getPlugin()) {
+        synchronized (SateJewels.getINSTANCE()) {
             if (this.connection != null && !this.connection.isClosed()) {
                 System.out.println("Текущее соединение еще открыто!");;
             } else {
@@ -60,7 +59,7 @@ public class DataBase implements Storage {
     @Override
     public void setJewels(String nick, int amount) {
         String playerName = nick.toLowerCase();
-        Bukkit.getScheduler().runTaskAsynchronously(SateJewels.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(SateJewels.getINSTANCE(), () -> {
             try {
                 PreparedStatement statement = this.connection.prepareStatement(String.format("SELECT JewelsAmount FROM %s WHERE Player=? FOR UPDATE", this.tableName));
                 statement.setString(1, playerName);
@@ -87,7 +86,7 @@ public class DataBase implements Storage {
 
     @Override
     public void clear() {
-        Bukkit.getScheduler().runTaskAsynchronously(SateJewels.getPlugin(), () -> {
+        Bukkit.getScheduler().runTaskAsynchronously(SateJewels.getINSTANCE(), () -> {
             try {
                 PreparedStatement state = connection.prepareStatement("TRUNCATE TABLE " + this.tableName);
                 state.executeUpdate();
