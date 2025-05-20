@@ -6,8 +6,6 @@ depend:
   - LunaSpring
 softdepend:
   - PlaceholderAPI
-loadbefore:
-  - zAuctionHouseV3
 commands:
   satejewels:
     aliases:

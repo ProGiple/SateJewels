@@ -3,10 +3,8 @@ package org.satellite.progiple.satejewels;
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.bukkit.plugin.RegisteredServiceProvider;
-import org.novasparkle.lunaspring.API.util.utilities.Utils;
 import org.novasparkle.lunaspring.LunaPlugin;
 import org.satellite.progiple.satejewels.api.SJAPI;
-import org.satellite.progiple.satejewels.api.ZAuctionHouse;
 import org.satellite.progiple.satejewels.storages.Storage;
 import org.satellite.progiple.satejewels.storages.configs.DataConfig;
 import org.satellite.progiple.satejewels.storages.configs.managers.ConfigManager;
@@ -21,9 +19,9 @@ public final class SateJewels extends LunaPlugin {
 
     @Override
     public void onEnable() {
+        INSTANCE = this;
         super.onEnable();
 
-        INSTANCE = this;
         sjapi = new SJAPI();
         this.saveDefaultConfig();
         this.registerTabExecutor(new Command(), "satejewels");
@@ -61,9 +59,9 @@ public final class SateJewels extends LunaPlugin {
             return null;
         });
 
-        if (Utils.isPluginEnabled("zAuctionHouseV3")) {
-            new ZAuctionHouse().register();
-        }
+//        if (Utils.isPluginEnabled("zAuctionHouseV3")) {
+//            new ZAuctionHouse().register();
+//        }
     }
 
     public <T> T getProvider(Class<T> classz) {

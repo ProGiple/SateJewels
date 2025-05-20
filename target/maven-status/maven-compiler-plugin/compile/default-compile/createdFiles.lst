@@ -1,5 +1,4 @@
 org\satellite\progiple\satejewels\storages\Storage.class
-org\satellite\progiple\satejewels\api\ZAuctionHouse$SateAucEconomy.class
 org\satellite\progiple\satejewels\storages\configs\managers\ConfigManager.class
 org\satellite\progiple\satejewels\Command.class
 org\satellite\progiple\satejewels\api\SJAPI.class

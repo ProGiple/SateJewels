@@ -3,36 +3,37 @@ package org.satellite.progiple.satejewels.Utils;
 import org.bukkit.ChatColor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
+import org.novasparkle.lunaspring.API.util.service.managers.ColorManager;
+import org.novasparkle.lunaspring.API.util.utilities.Utils;
 import org.satellite.progiple.satejewels.SateJewels;
 import org.satellite.progiple.satejewels.storages.configs.managers.ConfigManager;
 
 import java.util.Map;
 
 public class Tools {
-    public static String color(String text) {
-        return ChatColor.translateAlternateColorCodes('&', text);
-    }
-
     public static void sendMessage(CommandSender sender, String messageId, String soundId) {
         Tools.sendMessage(sender, messageId, 0, "", soundId);
     }
 
     public static void sendMessage(CommandSender sender, String messageId, String amount, String getterNick, String soundId) {
         String message = ConfigManager.getString(String.format("messages.%s", messageId));
-        message = message.replace("{amount}", amount);
-        message = message.replace("{player}", getterNick);
+        message = Utils.applyReplacements(message, "amount-%-" + amount, "player-%-" + getterNick);
 
         if (sender == null) return;
-        if (message.contains("{name_")) {
+        if (message.contains("{name_") || message.contains("[name_")) {
             for (Map.Entry<String, String> entry : SateJewels.getINSTANCE().getSjapi().getJewelNames().entrySet()) {
-                message = message.replace(String.format("{name_%s}", entry.getKey()), entry.getValue());
+                message = message
+                        .replace(String.format("{name_%s}", entry.getKey()), entry.getValue())
+                        .replace(String.format("[name_%s]", entry.getKey()), entry.getValue());
             }
         }
 
-        sender.sendMessage(Tools.color(message));
         if (sender instanceof Player player) {
             player.playSound(player.getLocation(), ConfigManager.getSound(soundId), 1, 1);
+            message = Utils.setPlaceholders(player, message);
         }
+
+        sender.sendMessage(ColorManager.color(message));
     }
 
     public static void sendMessage(CommandSender sender, String messageId, int amount, String getterNick, String soundId) {
