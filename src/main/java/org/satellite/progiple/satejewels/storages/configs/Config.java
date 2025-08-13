@@ -1,8 +1,9 @@
-package org.satellite.progiple.satejewels.storages.configs.managers;
+package org.satellite.progiple.satejewels.storages.configs;
 
 import lombok.Getter;
 import lombok.experimental.UtilityClass;
 import org.bukkit.Sound;
+import org.bukkit.command.CommandSender;
 import org.bukkit.configuration.ConfigurationSection;
 import org.novasparkle.lunaspring.API.configuration.IConfig;
 import org.satellite.progiple.satejewels.SateJewels;
@@ -11,7 +12,7 @@ import java.util.HashMap;
 import java.util.Map;
 
 @UtilityClass
-public class ConfigManager {
+public class Config {
     @Getter
     private Map<String, String> jewelsNames = new HashMap<>();
     private final IConfig config;
@@ -24,26 +25,23 @@ public class ConfigManager {
         return config.getString(path);
     }
 
-    public Sound getSound(String type) {
-        return Sound.valueOf(config.getString(String.format("sounds.%s", type)));
-    }
-
     public void reload() {
         config.reload(SateJewels.getINSTANCE());
 
         ConfigurationSection section = config.getSection("jewelsSettings.names");
         if (section == null) return;
+
         jewelsNames.clear();
         for (String id : section.getKeys(false)) {
             jewelsNames.put(id, section.getString(id));
         }
     }
 
-    public static ConfigurationSection getSection(String storage) {
+    public ConfigurationSection getSection(String storage) {
         return config.getSection(storage);
     }
 
-    public static boolean getBool(String path) {
-        return config.getBoolean(path);
+    public void sendMessage(CommandSender sender, String id, String... rpl) {
+        config.sendMessage(sender, id, rpl);
     }
 }
