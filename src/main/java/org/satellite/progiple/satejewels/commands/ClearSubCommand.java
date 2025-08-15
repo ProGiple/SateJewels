@@ -10,7 +10,7 @@ import org.satellite.progiple.satejewels.SateJewels;
 import org.satellite.progiple.satejewels.storages.configs.Config;
 
 @SubCommand(appliedCommand = "satejewels", commandIdentifiers = {"fullClear", "clear"})
-@TabCompleteIgnore(ignoreList = "clear")
+@TabCompleteIgnore("clear")
 @Check(permissions = "satejewels.clear", flags = ZeroArgCommand.AccessFlag.CONSOLE_ONLY)
 public class ClearSubCommand implements Invocation {
     @Override

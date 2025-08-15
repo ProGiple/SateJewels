@@ -14,7 +14,7 @@ import org.satellite.progiple.satejewels.storages.configs.Config;
 import java.util.List;
 
 @SubCommand(appliedCommand = "satejewels", commandIdentifiers = "set")
-@Permissions(permissionList = "satejewels.set")
+@Permissions("satejewels.set")
 @Args(min = 3, max = 3)
 public class SetSubCommand implements LunaCompleter {
     // sj set <nick> <value>

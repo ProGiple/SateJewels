@@ -13,7 +13,7 @@ import org.satellite.progiple.satejewels.storages.configs.Config;
 import java.util.List;
 
 @SubCommand(appliedCommand = "satejewels", commandIdentifiers = {"balance", "bal"})
-@TabCompleteIgnore(ignoreList = "bal")
+@TabCompleteIgnore("bal")
 @Args(min = 1, max = 2)
 public class BalanceSubCommand implements LunaCompleter {
     @Override

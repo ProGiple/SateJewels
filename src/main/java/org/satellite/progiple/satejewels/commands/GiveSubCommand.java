@@ -14,8 +14,8 @@ import org.satellite.progiple.satejewels.storages.configs.Config;
 import java.util.List;
 
 @SubCommand(appliedCommand = "satejewels", commandIdentifiers = {"add", "give"})
-@TabCompleteIgnore(ignoreList = "add")
-@Permissions(permissionList = "satejewels.give")
+@TabCompleteIgnore("add")
+@Permissions("satejewels.give")
 @Args(min = 2, max = 3)
 public class GiveSubCommand implements LunaCompleter {
     // sj add <nick> <value>
