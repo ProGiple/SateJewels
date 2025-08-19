@@ -4,10 +4,10 @@ import org.bukkit.Bukkit;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
 import org.novasparkle.lunaspring.API.commands.LunaCompleter;
-import org.novasparkle.lunaspring.API.commands.ZeroArgCommand;
 import org.novasparkle.lunaspring.API.commands.annotations.Args;
 import org.novasparkle.lunaspring.API.commands.annotations.Check;
 import org.novasparkle.lunaspring.API.commands.annotations.SubCommand;
+import org.novasparkle.lunaspring.API.commands.processor.ZeroArgCommand;
 import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
 import org.novasparkle.lunaspring.API.util.utilities.Utils;
 import org.satellite.progiple.satejewels.SateJewels;
@@ -16,7 +16,7 @@ import org.satellite.progiple.satejewels.storages.configs.Config;
 import java.util.List;
 
 @SubCommand(appliedCommand = "satejewels", commandIdentifiers = "pay")
-@Check(permissions = "satejewels.pay", flags = ZeroArgCommand.AccessFlag.PLAYER_ONLY)
+@Check(permissions = "@.pay", flags = ZeroArgCommand.AccessFlag.PLAYER_ONLY)
 @Args(min = 3, max = 3)
 public class PaySubCommand implements LunaCompleter {
     // sj pay <player> <amount>

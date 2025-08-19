@@ -10,7 +10,7 @@ import org.satellite.progiple.satejewels.storages.configs.Config;
 import org.satellite.progiple.satejewels.storages.configs.DataConfig;
 
 @SubCommand(appliedCommand = "satejewels", commandIdentifiers = "reload")
-@Permissions("satejewels.reload")
+@Permissions("@.reload")
 public class ReloadSubCommand implements Invocation {
     @Override
     public void invoke(CommandSender sender, String[] strings) {

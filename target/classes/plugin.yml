@@ -1,5 +1,5 @@
 name: SateJewels
-version: '2.0.8'
+version: '2.0.10'
 main: org.satellite.progiple.satejewels.SateJewels
 api-version: '1.16'
 depend:
@@ -15,7 +15,9 @@ commands:
       - sj
       - satej
 permissions:
-  satejewels.admin:
+  satejewels.give:
+    default: op
+  satejewels.reload:
     default: op
   satejewels.balance.another:
     default: op
@@ -23,3 +25,9 @@ permissions:
     default: true
   satejewels.pay:
     default: op
+  satejewels.take:
+    default: op
+  satejewels.set:
+    default: op
+  satejewels.clear:
+    default: false

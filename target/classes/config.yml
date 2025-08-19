@@ -1,8 +1,8 @@
 storage:
   storageType: h2 # h2 или mysql, h2 -> хранение в файле
   mySql:
-    username: ""
-    password: ''
+    username: "root"
+    password: 'password'
     port: 3306
     dbName: ''
     tableName: ''
@@ -15,21 +15,19 @@ jewelsSettings:
     2st: 'Аметиста'
     icon: '₳'
 messages: # пустая строка = выключено
-  giveJewels: 'Вы выдали игроку {player} x{amount}{name_icon}'
-  giveAllJewels: 'Вы выдали всем игрокам x{amount}{name_icon}'
-  balance: 'Ваш баланс: x{amount}{name_icon}'
-  playerBalance: 'Баланса игрока {player}: x{amount}{name_icon}'
-  removeJewels: 'Вы забрали у игрока {player} x{amount}{name_icon}'
-  payJewels: 'Вы отправили игроку {player} x{amount}{name_icon}'
-  payedJewels: 'Вы получили x{amount}{name_icon} от игрока {player}'
-  setJewels: 'Вы установили игроку {player} x{amount}{name_icon}'
-  noPerm: 'У вас нет прав на использование этого!'
+  playerIsOffline: "Игрок [player] не в сети!"
+  giveJewels: 'Вы выдали игроку [player] x[amount]'
+  balance: 'Ваш баланс: x[amount]'
+  playerBalance: 'Баланса игрока [player]: x[amount]'
+  takeJewels: 'Вы забрали у игрока [player] x[amount]'
+  payJewels: 'Вы отправили игроку [player] x[amount]'
+  getPayedJewels: 'Вы получили x[amount] от игрока [player]'
+  clearStorage: "Вы успешно очистили всех игроков!"
+  setJewels: 'Вы установили игроку [player] x[amount]'
+  noPermission: 'У вас нет прав на использование этого!'
   reloadPlugin: 'Плагин перезагружен!'
   noArgs: 'Недостаточно аргументов!'
   noJewels: 'У вас не хватает средств для перевода!'
-sounds:
-  successful: ENTITY_EXPERIENCE_ORB_PICKUP
-  error: BLOCK_ANVIL_PLACE
 placeholders: # плейсхолдеры: %satejewels_name_<name>%, %satejewels_autoname%, %satejewels_balance%
   autoName: # %satejewels_autoname%
     0: "1st"

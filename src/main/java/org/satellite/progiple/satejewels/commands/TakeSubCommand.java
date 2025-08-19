@@ -15,7 +15,7 @@ import java.util.List;
 
 @SubCommand(appliedCommand = "satejewels", commandIdentifiers = {"remove", "take", "rem", "delete"})
 @TabCompleteIgnore({"remove", "rem", "delete"})
-@Permissions("satejewels.take")
+@Permissions("@.take")
 @Args(min = 2, max = 3)
 public class TakeSubCommand implements LunaCompleter {
     // sj take <nick> <value>
