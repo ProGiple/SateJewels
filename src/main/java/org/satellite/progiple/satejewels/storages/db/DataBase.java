@@ -1,98 +1,47 @@
 package org.satellite.progiple.satejewels.storages.db;
 
-import lombok.SneakyThrows;
-import org.bukkit.Bukkit;
 import org.bukkit.configuration.ConfigurationSection;
-import org.satellite.progiple.satejewels.SateJewels;
+import org.novasparkle.lunaspring.API.database.AsyncExecutor;
+import org.novasparkle.lunaspring.API.database.ResultSetHandler;
 import org.satellite.progiple.satejewels.storages.Storage;
 
-import java.sql.*;
+import java.util.List;
 
-public class DataBase implements Storage {
-    private final String username;
-    private final String dbName;
-    private final String password;
-    private final int port;
+public class DataBase extends AsyncExecutor implements Storage {
     private final String tableName;
-
-    private Connection connection;
-
-    @SneakyThrows
+    private final ResultSetHandler<Integer> resultSetHandler;
     public DataBase(ConfigurationSection section) {
-        this.username = section.getString("username");
-        this.dbName = section.getString("username");
-        this.password = section.getString("username");
-        this.port = section.getInt("port");
-        this.tableName = section.getString("username");
-        this.initialize();
+        super(section);
+        this.tableName = section.getString("tableName");
+
+        this.resultSetHandler = rs -> rs.getInt("JewelsAmount");
+        this.createTable();
     }
 
-    public void initialize() throws SQLException, ClassNotFoundException {
-        synchronized (SateJewels.getINSTANCE()) {
-            if (this.connection != null && !this.connection.isClosed()) {
-                System.out.println("Текущее соединение еще открыто!");;
-            } else {
-                Class.forName("com.mysql.cj.jdbc.Driver");
-                this.connection = DriverManager.getConnection(String.format("jdbc:mysql://%s:%d/%s", this.username, this.port, this.dbName), this.username, this.password);
-
-                try (PreparedStatement statement =
-                             this.connection.prepareStatement(String.format("CREATE TABLE IF NOT EXISTS %s (ID int PRIMARY KEY NOT NULL AUTO_INCREMENT, Player varchar(55), JewelsAmount int)", this.tableName))) {
-                    statement.executeUpdate();
-                }
-
-            }
-        }
+    public void createTable() {
+        this.executeSync(String.format("CREATE TABLE IF NOT EXISTS %s (Player varchar(55), JewelsAmount int);", this.tableName));
     }
 
     @Override
-    @SneakyThrows
     public int getJewels(String nick) {
-        String playerName = nick.toLowerCase();
-        PreparedStatement statement = this.connection.prepareStatement(String.format("SELECT JewelsAmount FROM %s WHERE Player=? FOR UPDATE", this.tableName));
-
-        statement.setString(1, playerName);
-        ResultSet resultSet = statement.executeQuery();
-
-        return resultSet.getInt("JewelsAmount");
+        return this.executeQuery(String.format("SELECT JewelsAmount FROM %s WHERE Player=?;", this.tableName), this.resultSetHandler, nick.toLowerCase()).stream().findFirst().orElse(0);
     }
 
     @Override
     public void setJewels(String nick, int amount) {
-        String playerName = nick.toLowerCase();
-        Bukkit.getScheduler().runTaskAsynchronously(SateJewels.getINSTANCE(), () -> {
-            try {
-                PreparedStatement statement = this.connection.prepareStatement(String.format("SELECT JewelsAmount FROM %s WHERE Player=? FOR UPDATE", this.tableName));
-                statement.setString(1, playerName);
+        nick = nick.toLowerCase();
 
-                ResultSet resultSet = statement.executeQuery();
-                if (resultSet.next()) {
-                    PreparedStatement updateState = this.connection.prepareStatement(String.format("UPDATE %s SET JewelsAmount=? WHERE Player=?", this.tableName));
-                    updateState.setInt(1, amount);
-                    updateState.setString(2, playerName);
-
-                    updateState.executeUpdate();
-                } else {
-                    PreparedStatement insertState = this.connection.prepareStatement(String.format("INSERT INTO %s (JewelsAmount, Player) VALUES (?, ?)", this.tableName));
-                    insertState.setInt(1, amount);
-                    insertState.setString(1, playerName);
-
-                    insertState.executeUpdate();
-                }
-            } catch (SQLException e) {
-                throw new RuntimeException(e);
-            }
-        });
+        List<Integer> integerList = this.executeQuery(String.format("SELECT JewelsAmount FROM %s WHERE Player=?;", this.tableName), this.resultSetHandler, nick);
+        if (integerList.isEmpty()) {
+            this.executeSync(String.format("INSERT INTO %s (Player, JewelsAmount) VALUES (?, ?);", this.tableName), nick, amount);
+        }
+        else {
+            this.executeSync(String.format("UPDATE %s SET JewelsAmount=? WHERE Player=?;", this.tableName), amount, nick);
+        }
     }
 
     @Override
     public void clear() {
-        Bukkit.getScheduler().runTaskAsynchronously(SateJewels.getINSTANCE(), () -> {
-            try {
-                PreparedStatement state = connection.prepareStatement("TRUNCATE TABLE " + this.tableName);
-                state.executeUpdate();
-            } catch (SQLException e) {
-                e.printStackTrace();
-            }
-        });
+        this.executeAsync(String.format("TRUNCATE TABLE %s;", this.tableName));
     }
 }

@@ -1,11 +1,14 @@
 storage:
   storageType: h2 # h2 или mysql, h2 -> хранение в файле
-  mySql:
-    username: "root"
-    password: 'password'
-    port: 3306
-    dbName: ''
-    tableName: ''
+  mysql:
+    url: 'jdbc:mysql://localhost:3306/SateGuard'
+    username: 'admin_lp'
+    password: '1q0o2w9ibn'
+    driverClass: 'com.mysql.cj.jdbc.Driver'
+    tableName: 'sj'
+    poolSize: 10
+    maxRetries: 5
+    asyncThreadPoolSize: 10
   configuration:
     fileName: 'playersData.yml'
 jewelsSettings:
