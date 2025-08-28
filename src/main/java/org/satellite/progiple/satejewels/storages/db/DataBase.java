@@ -6,7 +6,6 @@ import org.novasparkle.lunaspring.API.database.ResultSetHandler;
 import org.satellite.progiple.satejewels.storages.Storage;
 
 import java.util.List;
-
 public class DataBase extends AsyncExecutor implements Storage {
     private final String tableName;
     private final ResultSetHandler<Integer> resultSetHandler;
@@ -45,3 +44,4 @@ public class DataBase extends AsyncExecutor implements Storage {
         this.executeAsync(String.format("TRUNCATE TABLE %s;", this.tableName));
     }
 }
+

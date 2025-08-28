@@ -26,7 +26,7 @@ public final class SateJewels extends LunaPlugin {
         API = new SJAPI();
         this.saveDefaultConfig();
 
-        LunaExecutor.initialize(this, "org.satellite.progiple.satejewels.commands");
+        LunaExecutor.initialize(this, "#.commands");
 
         ConfigurationSection storageSection = Config.getSection("storage");
         if (Objects.requireNonNull(storageSection.getString("storageType")).equalsIgnoreCase("mysql")) {
