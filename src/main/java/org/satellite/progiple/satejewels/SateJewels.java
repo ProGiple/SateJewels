@@ -3,6 +3,7 @@ package org.satellite.progiple.satejewels;
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
 import org.novasparkle.lunaspring.API.commands.LunaExecutor;
+import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
 import org.novasparkle.lunaspring.LunaPlugin;
 import org.satellite.progiple.satejewels.api.SJAPI;
 import org.satellite.progiple.satejewels.storages.Storage;
@@ -40,6 +41,11 @@ public final class SateJewels extends LunaPlugin {
             if (params.contains("name_")) {
                 String[] massive = params.split("_");
                 return massive.length >= 2 ? API.getJewelName(massive[1]) : null;
+            }
+
+            if (params.startsWith("autoname-")) {
+                String[] split = params.split("-");
+                return API.getJewelName(LunaMath.toInt(split[1]));
             }
 
             int value = API.getJewels(player);

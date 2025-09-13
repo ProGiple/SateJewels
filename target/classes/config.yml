@@ -1,6 +1,6 @@
 storage:
   storageType: h2 # h2 или mysql, h2 -> хранение в файле
-  mysql:
+  mySql:
     url: 'jdbc:mysql://localhost:3306/SateGuard'
     username: 'admin_lp'
     password: '1q0o2w9ibn'

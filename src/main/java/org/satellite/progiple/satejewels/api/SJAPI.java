@@ -81,6 +81,7 @@ public class SJAPI {
 
     public String getJewelName(int value) {
         String mainPath = "placeholders.autoName.%s";
+        if (value >= 11 && value <= 19) return this.getJewelName(Config.getString(String.format(mainPath, "5+")));
 
         byte lastNum = (byte) (value % 10);
         return switch (lastNum) {
