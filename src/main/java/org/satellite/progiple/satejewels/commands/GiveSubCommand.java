@@ -1,7 +1,7 @@
 package org.satellite.progiple.satejewels.commands;
 
 import org.bukkit.command.CommandSender;
-import org.novasparkle.lunaspring.API.commands.LunaCompleter;
+import org.novasparkle.lunaspring.API.commands.LunaExecutor;
 import org.novasparkle.lunaspring.API.commands.annotations.Args;
 import org.novasparkle.lunaspring.API.commands.annotations.Permissions;
 import org.novasparkle.lunaspring.API.commands.annotations.SubCommand;
@@ -17,7 +17,7 @@ import java.util.List;
 @TabCompleteIgnore("add")
 @Permissions("@.give")
 @Args(min = 2, max = 3)
-public class GiveSubCommand implements LunaCompleter {
+public class GiveSubCommand implements LunaExecutor {
     // sj add <nick> <value>
 
     @Override

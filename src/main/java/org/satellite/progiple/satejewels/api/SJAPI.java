@@ -2,6 +2,7 @@ package org.satellite.progiple.satejewels.api;
 
 import org.bukkit.Bukkit;
 import org.bukkit.OfflinePlayer;
+import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
 import org.satellite.progiple.satejewels.SateJewels;
 import org.satellite.progiple.satejewels.storages.Storage;
 import org.satellite.progiple.satejewels.storages.configs.Config;
@@ -81,7 +82,14 @@ public class SJAPI {
 
     public String getJewelName(int value) {
         String mainPath = "placeholders.autoName.%s";
-        if (value >= 11 && value <= 19) return this.getJewelName(Config.getString(String.format(mainPath, "5+")));
+
+        String strValue = String.valueOf(value);
+        if (strValue.length() >= 2) {
+            int cachedValue = LunaMath.toInt(strValue.substring(strValue.length() - 2));
+
+            if (cachedValue >= 11 && cachedValue <= 19)
+                return this.getJewelName(Config.getString(String.format(mainPath, "5+")));
+        }
 
         byte lastNum = (byte) (value % 10);
         return switch (lastNum) {

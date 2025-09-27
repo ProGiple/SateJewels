@@ -2,8 +2,9 @@ package org.satellite.progiple.satejewels;
 
 import lombok.Getter;
 import org.bukkit.configuration.ConfigurationSection;
-import org.novasparkle.lunaspring.API.commands.LunaExecutor;
+import org.novasparkle.lunaspring.API.commands.CommandInitializer;
 import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
+import org.novasparkle.lunaspring.API.util.utilities.Utils;
 import org.novasparkle.lunaspring.LunaPlugin;
 import org.satellite.progiple.satejewels.api.SJAPI;
 import org.satellite.progiple.satejewels.storages.Storage;
@@ -27,7 +28,7 @@ public final class SateJewels extends LunaPlugin {
         API = new SJAPI();
         this.saveDefaultConfig();
 
-        LunaExecutor.initialize(this, "#.commands");
+        CommandInitializer.initialize(this, "#.commands");
 
         ConfigurationSection storageSection = Config.getSection("storage");
         if (Objects.requireNonNull(storageSection.getString("storageType")).equalsIgnoreCase("mysql")) {
@@ -45,7 +46,7 @@ public final class SateJewels extends LunaPlugin {
 
             if (params.startsWith("autoname-")) {
                 String[] split = params.split("-");
-                return API.getJewelName(LunaMath.toInt(split[1]));
+                return API.getJewelName(LunaMath.toInt(Utils.setBracketPlaceholders(player, split[1])));
             }
 
             int value = API.getJewels(player);

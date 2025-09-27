@@ -1,8 +1,7 @@
 package org.satellite.progiple.satejewels.commands;
 
 import org.bukkit.command.CommandSender;
-import org.bukkit.entity.Player;
-import org.novasparkle.lunaspring.API.commands.LunaCompleter;
+import org.novasparkle.lunaspring.API.commands.LunaExecutor;
 import org.novasparkle.lunaspring.API.commands.annotations.Args;
 import org.novasparkle.lunaspring.API.commands.annotations.SubCommand;
 import org.novasparkle.lunaspring.API.commands.annotations.TabCompleteIgnore;
@@ -15,7 +14,7 @@ import java.util.List;
 @SubCommand(appliedCommand = "satejewels", commandIdentifiers = {"balance", "bal"})
 @TabCompleteIgnore("bal")
 @Args(min = 1, max = 2)
-public class BalanceSubCommand implements LunaCompleter {
+public class BalanceSubCommand implements LunaExecutor {
     @Override
     public List<String> tabComplete(CommandSender sender, List<String> list) {
         return list.size() == 1 ? Utils.getPlayerNicks(list.get(0)) : null;

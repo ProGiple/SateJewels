@@ -1,11 +1,10 @@
 package org.satellite.progiple.satejewels.commands;
 
 import org.bukkit.command.CommandSender;
-import org.novasparkle.lunaspring.API.commands.LunaCompleter;
+import org.novasparkle.lunaspring.API.commands.LunaExecutor;
 import org.novasparkle.lunaspring.API.commands.annotations.Args;
 import org.novasparkle.lunaspring.API.commands.annotations.Permissions;
 import org.novasparkle.lunaspring.API.commands.annotations.SubCommand;
-import org.novasparkle.lunaspring.API.commands.annotations.TabCompleteIgnore;
 import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
 import org.novasparkle.lunaspring.API.util.utilities.Utils;
 import org.satellite.progiple.satejewels.SateJewels;
@@ -16,7 +15,7 @@ import java.util.List;
 @SubCommand(appliedCommand = "satejewels", commandIdentifiers = "set")
 @Permissions("@.set")
 @Args(min = 3, max = 3)
-public class SetSubCommand implements LunaCompleter {
+public class SetSubCommand implements LunaExecutor {
     // sj set <nick> <value>
 
     @Override
