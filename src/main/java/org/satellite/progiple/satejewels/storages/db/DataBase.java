@@ -28,6 +28,7 @@ public class DataBase extends AsyncExecutor implements Storage {
 
     @Override
     public void setJewels(String nick, int amount) {
+        if (amount < 0) amount = 0;
         nick = nick.toLowerCase();
 
         List<Integer> integerList = this.executeQuery(String.format("SELECT JewelsAmount FROM %s WHERE Player=?;", this.tableName), this.resultSetHandler, nick);
