@@ -22,7 +22,7 @@ public class GiveSubCommand implements LunaExecutor {
 
     @Override
     public List<String> tabComplete(CommandSender sender, List<String> list) {
-        return list.size() == 1 ? Utils.getPlayerNicks(list.get(0)) :
+        return list.size() == 1 ? Utils.getPlayerNicks(list.get(0), sender) :
                 list.size() == 2 ? List.of("<количество>") : null;
     }
 

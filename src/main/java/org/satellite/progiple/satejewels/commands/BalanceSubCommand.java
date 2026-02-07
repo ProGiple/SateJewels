@@ -17,7 +17,7 @@ import java.util.List;
 public class BalanceSubCommand implements LunaExecutor {
     @Override
     public List<String> tabComplete(CommandSender sender, List<String> list) {
-        return list.size() == 1 ? Utils.getPlayerNicks(list.get(0)) : null;
+        return list.size() == 1 ? Utils.getPlayerNicks(list.get(0), sender) : null;
     }
 
     @Override

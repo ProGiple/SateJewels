@@ -8,6 +8,7 @@ import org.novasparkle.lunaspring.API.commands.annotations.Args;
 import org.novasparkle.lunaspring.API.commands.annotations.Check;
 import org.novasparkle.lunaspring.API.commands.annotations.SubCommand;
 import org.novasparkle.lunaspring.API.commands.processor.NoArgCommand;
+import org.novasparkle.lunaspring.API.util.service.managers.VanishManager;
 import org.novasparkle.lunaspring.API.util.utilities.LunaMath;
 import org.novasparkle.lunaspring.API.util.utilities.Utils;
 import org.satellite.progiple.satejewels.SateJewels;
@@ -23,7 +24,7 @@ public class PaySubCommand implements LunaExecutor {
 
     @Override
     public List<String> tabComplete(CommandSender sender, List<String> list) {
-        return list.size() == 1 ? Utils.getPlayerNicks(list.get(0)) :
+        return list.size() == 1 ? Utils.getPlayerNicks(list.get(0), sender) :
                 list.size() == 2 ? List.of("<количество>") : null;
     }
 
@@ -32,7 +33,7 @@ public class PaySubCommand implements LunaExecutor {
         String nick = strings[1];
         int value = LunaMath.toInt(strings[2], 1);
 
-        Player player = Bukkit.getPlayer(nick);
+        Player player = VanishManager.exact(nick);
         if (player == null || !player.isOnline()) {
             Config.sendMessage(sender, "playerIsOffline", "player-%-" + nick);
             return;
