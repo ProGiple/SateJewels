@@ -1,0 +1,39 @@
+storage:
+  storageType: h2 # h2 или mysql, h2 -> хранение в файле
+  mySql:
+    url: 'jdbc:mysql://localhost:3306/название БД'
+    username: 'admin_lp'
+    password: ''
+    driverClass: 'com.mysql.cj.jdbc.Driver'
+    tableName: 'sj'
+    poolSize: 10
+    maxRetries: 5
+    asyncThreadPoolSize: 10
+  configuration:
+    fileName: 'playersData.yml'
+jewelsSettings:
+  names:
+    0st: 'Аметист'
+    1st: 'Аметистов'
+    2st: 'Аметиста'
+    icon: '₳'
+messages: # пустая строка = выключено
+  playerIsOffline: "Игрок [player] не в сети!"
+  giveJewels: 'Вы выдали игроку [player] x[amount]'
+  balance: 'Ваш баланс: x[amount]'
+  playerBalance: 'Баланса игрока [player]: x[amount]'
+  takeJewels: 'Вы забрали у игрока [player] x[amount]'
+  payJewels: 'Вы отправили игроку [player] x[amount]'
+  getPayedJewels: 'Вы получили x[amount] от игрока [player]'
+  clearStorage: "Вы успешно очистили всех игроков!"
+  setJewels: 'Вы установили игроку [player] x[amount]'
+  noPermission: 'У вас нет прав на использование этого!'
+  reloadPlugin: 'Плагин перезагружен!'
+  noArgs: 'Недостаточно аргументов!'
+  noJewels: 'У вас не хватает средств для перевода!'
+placeholders: # плейсхолдеры: %satejewels_name_<name>%, %satejewels_autoname%, %satejewels_balance%
+  autoName: # %satejewels_autoname%
+    0: "1st"
+    1: "0st"
+    2-4: "2st"
+    5+: "1st"

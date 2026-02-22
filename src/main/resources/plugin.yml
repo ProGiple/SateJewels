@@ -1,0 +1,33 @@
+name: SateJewels
+version: '${project.version}'
+main: org.satellite.progiple.satejewels.SateJewels
+api-version: '1.16'
+depend:
+  - LunaSpring
+softdepend:
+  - PlaceholderAPI
+commands:
+  satejewels:
+    aliases:
+      - j
+      - jewels
+      - sjewels
+      - sj
+      - satej
+permissions:
+  satejewels.give:
+    default: op
+  satejewels.reload:
+    default: op
+  satejewels.balance.another:
+    default: op
+  satejewels.balance:
+    default: true
+  satejewels.pay:
+    default: op
+  satejewels.take:
+    default: op
+  satejewels.set:
+    default: op
+  satejewels.clear:
+    default: false
